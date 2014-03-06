@@ -1,0 +1,29 @@
+.fill {
+	min-height: 100%;
+	height: 100%;
+}
+
+html, body {
+    height: 85%;
+}
+
+.top-buffer { margin-top:20px; }
+
+.DocumentList
+{
+    overflow-x:scroll;
+    overflow-y:hidden;
+    /*padding: 0 15px;*/
+    white-space: nowrap;
+    position: relative;
+}
+
+.DocumentItem
+{
+    padding:20px;
+    width: 250px;
+}
+
+.specialrow {
+    width: 500%;
+}
