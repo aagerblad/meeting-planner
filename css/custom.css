@@ -20,7 +20,7 @@ body {
 
 .DocumentList
 {
-    overflow-x:auto;
+    overflow-x:scroll;
     overflow-y:hidden;
     /*padding: 0 15px;*/
     white-space: nowrap;
@@ -31,10 +31,11 @@ body {
 {
     padding:20px;
     width: 250px;
+    float: left;
 }
 
 .specialrow {
-    /*width: 500%;*/
+ /*   width: auto;*/
 }
 
 .list-wrapper {

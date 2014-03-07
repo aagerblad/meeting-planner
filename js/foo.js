@@ -28,6 +28,10 @@ $(document).ready(function(){
 		distance: 1.0
 	})
 
+	$('#row-of-days').sortable({
+		revert: true
+	})
+
 })
 
 /*function setDraggable() {
