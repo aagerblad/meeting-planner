@@ -47,8 +47,8 @@ var DayView = function(container, model){
 			list.addClass('list-group');
 
 			var dayItems = day._activities;
-			for (var i = dayItems.length - 1; i >= 0; i--) {
-				item = dayItems[i];
+			for (var j = dayItems.length - 1; j >= 0; j--) {
+				item = dayItems[j];
 				var listItem = $('<li></li>');
 				listItem.addClass('list-group-item');
 
