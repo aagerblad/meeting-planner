@@ -208,7 +208,7 @@ function Model(){
 		}
 		this.notifyObservers();
 	};
-	
+
 	//*** OBSERVABLE PATTERN ***
 	var listeners = [];
 	
@@ -220,23 +220,24 @@ function Model(){
 	
 	this.addObserver = function (listener) {
 	    listeners.push(listener);
+		alert(listener);
 	};
 	//*** END OBSERVABLE PATTERN ***
 }
 
 // this is the instance of our main model
 // this is what you should use in your application
-var model = new Model();
-createTestData();
+//var model = new Model();
+//createTestData();
 
 // you can use this method to create some test data and test your implementation
-function createTestData(){
+function createTestData(model){
 	model.addDay();
-	model.addActivity(new Activity("Introduction",10,0,""),0);
+	model.addActivity(new Activity("Introduction",10,0,""),null);
 	model.addActivity(new Activity("Idea 1",30,0,""),0);
 	model.addActivity(new Activity("Working in groups",35,1,""),0);
-	model.addActivity(new Activity("Idea 1 discussion",15,2,""),0);
-	model.addActivity(new Activity("Coffee break",20,3,""),0);
+	model.addActivity(new Activity("Idea 1 discussion",15,2,""),null);
+	model.addActivity(new Activity("Coffee break",20,3,""),null);
 	
 	console.log("Day Start: " + model.days[0].getStart());
 	console.log("Day End: " + model.days[0].getEnd());
