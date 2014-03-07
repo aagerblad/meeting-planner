@@ -1,5 +1,9 @@
 $(document).ready(function(){
 	$('li').draggable({
-		axis: "x"	
+		revert: "invalid"	
+	})
+
+	$('li').mousedown(function(){
+		$(this).css('z-index',100);
 	})
 })
