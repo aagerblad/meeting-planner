@@ -35,7 +35,7 @@ var DayView = function(container, model){
 
 			var listHolder = $('<div></div>');
 			listHolder.addClass('list-droppable');
-			listHolder.addClass('fill');
+			listHolder.addClass('list-fill');
 			listHolder.addClass('top-buffer');
 			listHolder.addClass('panel');
 

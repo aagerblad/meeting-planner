@@ -28,7 +28,7 @@ $(document).ready(function(){
 		distance: 1.0
 	})
 
-	$('#row-of-days').sortable({
+	$('#days_container').sortable({
 		revert: true
 	})
 
