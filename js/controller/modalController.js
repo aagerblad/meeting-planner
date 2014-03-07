@@ -8,7 +8,7 @@ var ModalController = function(view, model){
 });
 
 	function addActivity() {
-		model.addActivity(new Activity(view.acTitle.val(), view.acTime.val(), view.acTypes.val(), view.acDesc.val()), null);
+		model.addActivity(new Activity(view.acTitle.val(), view.acTime.val(), view.acTypes.val(), view.acDesc.val(), model.getNextId(), model), null);
 	}
 
 	
