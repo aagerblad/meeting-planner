@@ -1,10 +1,11 @@
 var ParkedListView = function(container, model){
 	
-	//model.addObserver(this);
+	model.addObserver(this);
 	fillParkedList();
 
 	function fillParkedList(){
 		var parkedItems = model.parkedActivities;
+		container.children().remove();
 
 		for (var i = parkedItems.length - 1; i >= 0; i--) {
 			item = parkedItems[i];
@@ -30,6 +31,9 @@ var ParkedListView = function(container, model){
 
 
 	this.update = function(arg){
-
+		if(arg=="activity_added") {
+			fillParkedList();
+		}
+		
 	}
 }

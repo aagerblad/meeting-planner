@@ -1,8 +1,5 @@
 // JavaScript Document
 
-// The possible activity types
-var ActivityType = ["Presentation","Group Work","Discussion","Break"]
-
 // This is an activity constructor
 // When you want to create a new activity you just call
 // var act = new Activity("some activity",20,1,"Some description);
@@ -59,7 +56,7 @@ function Activity(name,length,typeid,description){
 	// This method returns the string representation of the
 	// activity type.
 	this.getType = function () {
-		return ActivityType[_typeid];
+		return model.activityTypes[_typeid];
 	};
 }
 
@@ -145,6 +142,7 @@ function Day(startH,startM) {
 function Model(){
 	this.days = [];
 	this.parkedActivities = [];
+	this.activityTypes = ["Presentation","Group Work","Discussion","Break"];
 	
 	// adds a new day. if startH and startM (start hours and minutes)
 	// are not provided it will set the default start of the day to 08:00
@@ -170,7 +168,7 @@ function Model(){
 		} else {
 			this.parkedActivities.push(activity);
 		}
-		this.notifyObservers();
+		this.notifyObservers("activity_added");
 	}
 	
 	// add an activity to parked activities
@@ -220,7 +218,6 @@ function Model(){
 	
 	this.addObserver = function (listener) {
 	    listeners.push(listener);
-		alert(listener);
 	};
 	//*** END OBSERVABLE PATTERN ***
 }
@@ -242,7 +239,7 @@ function createTestData(model){
 	console.log("Day Start: " + model.days[0].getStart());
 	console.log("Day End: " + model.days[0].getEnd());
 	console.log("Day Length: " + model.days[0].getTotalLength() + " min");
-	$.each(ActivityType,function(index,type){
-		console.log("Day '" + ActivityType[index] + "' Length: " +  model.days[0].getLengthByType(index) + " min");
+	$.each(model.activityTypes,function(index,type){
+		console.log("Day '" + model.activityTypes[index] + "' Length: " +  model.days[0].getLengthByType(index) + " min");
 	});
 }
