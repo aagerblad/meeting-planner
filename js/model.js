@@ -3,11 +3,14 @@
 // This is an activity constructor
 // When you want to create a new activity you just call
 // var act = new Activity("some activity",20,1,"Some description);
-function Activity(name,length,typeid,description){
+function Activity(name,length,typeid,description, id, tempModel){
 	var _name = name;
 	var _length = length;
 	var _typeid = typeid;
 	var _description = description;
+	var _id = id;
+
+	tempModel.allActivities[_id] = this;
 	
 	// sets the name of the activity
 	this.setName = function(name) {
@@ -156,12 +159,19 @@ function Day(startH,startM) {
 
 // this is our main module that contians days and praked activites
 function Model(){
+	this.activityId = 0;
+	this.allActivities = [];
 	this.days = [];
 	this.parkedActivities = [];
 	this.activityTypes = ["Presentation","Group Work","Discussion","Break"];
 	
 	// adds a new day. if startH and startM (start hours and minutes)
 	// are not provided it will set the default start of the day to 08:00
+	this.getNextId = function () {
+		var oldActivityId = this.activityId 
+		this.activityId++;
+		return oldActivityId;
+	}
 	this.getParkedActivites = function () {
 		return this.parkedActivities;
 	};
@@ -247,11 +257,11 @@ function Model(){
 // you can use this method to create some test data and test your implementation
 function createTestData(model){
 	model.addDay();
-	model.addActivity(new Activity("Introduction",10,0,""),null);
-	model.addActivity(new Activity("Idea 1",30,0,""),0);
-	model.addActivity(new Activity("Working in groups",35,1,""),0);
-	model.addActivity(new Activity("Idea 1 discussion",15,2,""),null);
-	model.addActivity(new Activity("Coffee break",20,3,""),null);
+	model.addActivity(new Activity("Introduction",10,0,"", model.getNextId(), model),null);
+	model.addActivity(new Activity("Idea 1",30,0,"", model.getNextId(), model),0);
+	model.addActivity(new Activity("Working in groups",35,1,"", model.getNextId(), model),0);
+	model.addActivity(new Activity("Idea 1 discussion",15,2,"", model.getNextId(), model),null);
+	model.addActivity(new Activity("Coffee break",20,3,"", model.getNextId(), model),null);
 	
 	console.log("Day Start: " + model.days[0].getStart());
 	console.log("Day End: " + model.days[0].getEnd());

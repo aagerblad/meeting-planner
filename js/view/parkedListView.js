@@ -10,6 +10,7 @@ var ParkedListView = function(container, model){
 		for (var i = parkedItems.length - 1; i >= 0; i--) {
 			item = parkedItems[i];
 			var listItem = $('<li></li>');
+			listItem.attr('id', item._id);
 			listItem.addClass('list-group-item');
 
 			if(item.getTypeId() == 0)
