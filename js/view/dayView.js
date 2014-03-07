@@ -2,6 +2,8 @@ var DayView = function(container, model){
 	model.addObserver(this);
 	this.daysContainer = container.find('#days_container');
 	fillDays();
+	makeActivitiesSortable();
+	makeDaysSortable();
 
 	function fillDays() {
 		var days = model.days;
@@ -70,9 +72,37 @@ var DayView = function(container, model){
 		};
 	}
 
+	function makeActivitiesSortable() {
+		$('.day-list').sortable({
+		helper: "clone",
+		appendTo: "body",
+		placeholder: "placeholder-list-element",
+		forcePlaceholderSize: true,
+		connectWith: "ul",
+		tolerance: "pointer",
+		dropOnEmpty: true,
+		distance: 1.0,
+		/*receive: function(event, ui){
+			var activity = ui.item.attr("id")
+			model.addActivity(ui.item, )
+		}*/
+		})
+
+	}
+
+	function makeDaysSortable() {
+		$('#days_container').sortable({
+			revert: true,
+			containment: "parent"
+		})
+
+	}
+
 	this.update = function(arg) {
 		if(arg = "day_added") {
 			fillDays();
+			makeDaysSortable();
+			makeActivitiesSortable
 		}
 	}
 
