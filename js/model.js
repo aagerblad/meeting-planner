@@ -12,6 +12,10 @@ function Activity(name,length,typeid,description, id, tempModel){
 
 	tempModel.allActivities[_id] = this;
 	
+	this.getId = function() {
+		return _id;
+	}
+
 	// sets the name of the activity
 	this.setName = function(name) {
 		_name = name;

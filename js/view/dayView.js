@@ -51,7 +51,7 @@ var DayView = function(container, model){
 			for (var j = dayItems.length - 1; j >= 0; j--) {
 				item = dayItems[j];
 				var listItem = $('<li></li>');
-				listItem.attr('id', item._id);
+				listItem.attr('id', item.getId());
 				listItem.addClass('list-group-item');
 
 				if(item.getTypeId() == 0)
