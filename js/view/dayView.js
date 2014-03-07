@@ -35,6 +35,25 @@ var DayView = function(container, model){
 			info.append(totalTime);
 
 			row.append(info);
+
+			var diagram = $('<div></div>');
+			diagram.addClass("col-md-4");
+			diagram.css({'height':'90px'})
+
+			var stack1 = $('<div></div>');
+			stack1.css({'background':'green', 'height':'25%', 'width':'100%'});
+			var stack2 = $('<div></div>');
+			stack2.css({'background':'red', 'height':'25%', 'width':'100%'});
+			var stack3 = $('<div></div>');
+			stack3.css({'background':'yellow', 'height':'25%', 'width':'100%'});
+			var stack4 = $('<div></div>');
+			stack4.css({'background':'blue', 'height':'25%', 'width':'100%'});
+			diagram.append(stack1);
+			diagram.append(stack2);
+			diagram.append(stack3);
+			diagram.append(stack4);
+
+			row.append(diagram);
 			dayItem.append(row);
 
 			var listHolder = $('<div></div>');
