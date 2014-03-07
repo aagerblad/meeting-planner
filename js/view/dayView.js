@@ -9,13 +9,14 @@ var DayView = function(container, model){
 		var days = model.days;
 		$('#days_container').children().remove();
 
-		for (var i = days.length - 1; i >= 0; i--) {
+		for (var i = 0; i <= days.length - 1; i++) {
 			
 			var day = days[i];
 			var dayItem = $('<div></div>');
 			dayItem.addClass('col-md-3');
 			dayItem.addClass('DocumentItem');
 			dayItem.addClass('fill');
+			dayItem.addClass('panel');
 			
 			var row = $('<div></div>');
 			row.addClass('row');
@@ -37,10 +38,10 @@ var DayView = function(container, model){
 			dayItem.append(row);
 
 			var listHolder = $('<div></div>');
+			listHolder.addClass('panel');
 			listHolder.addClass('list-droppable');
 			listHolder.addClass('list-fill');
 			listHolder.addClass('top-buffer');
-			listHolder.addClass('panel');
 
 			var list = $('<ul></ul>');
 			list.addClass('day-list');
@@ -82,10 +83,10 @@ var DayView = function(container, model){
 		tolerance: "pointer",
 		dropOnEmpty: true,
 		distance: 1.0,
-		/*receive: function(event, ui){
-			var activity = ui.item.attr("id")
+		receive: function(event, ui){
+			var activity = model.allActivities[ui.item.attr("id")];
 			model.addActivity(ui.item, )
-		}*/
+		}
 		})
 
 	}
@@ -102,7 +103,7 @@ var DayView = function(container, model){
 		if(arg = "day_added") {
 			fillDays();
 			makeDaysSortable();
-			makeActivitiesSortable
+			makeActivitiesSortable();
 		}
 	}
 

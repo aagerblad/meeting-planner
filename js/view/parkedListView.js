@@ -26,10 +26,24 @@ var ParkedListView = function(container, model){
 		};
 	}
 
+	function makeParkedListSortable() {
+		$('#parkedList').sortable({
+		helper: "clone",
+		appendTo: "body",
+		placeholder: "placeholder-list-element",
+		forcePlaceholderSize: true,
+		connectWith: "ul",
+		tolerance: "pointer",
+		dropOnEmpty: true,
+		distance: 1.0
+	})
+	}
+
 
 	this.update = function(arg){
 		if(arg=="activity_added") {
 			fillParkedList();
+			makeParkedListSortable();
 		}
 		
 	}
