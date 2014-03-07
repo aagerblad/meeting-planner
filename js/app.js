@@ -7,6 +7,8 @@ $(function() {
     //var exampleViewController = new ExampleViewController(exampleView,model);
     var mainView = new MainView($('#mainBody'), model);
     var mainController = new MainController(mainView, model);
+    var dayView = new DayView($('#days'), model);
+    var dayController = new DayController(dayView, model);
     var parkedListView = new ParkedListView($('#parkedList'), model);
     var parkedListController = new ParkedListController(parkedListView, model);
     var modalView = new ModalView($('#newActivityModal'), model);
