@@ -60,3 +60,13 @@ body {
 .helper-class {
     width: 30px;
 }
+
+.placeholder-list-element {
+    background: #ccc;
+    border: 1px dotted #aaa;
+    padding: 10px;
+}
+
+.list-droppable {
+    overflow-y: auto;
+}

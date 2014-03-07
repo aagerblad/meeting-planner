@@ -21,9 +21,6 @@ var ParkedListView = function(container, model){
 				listItem.addClass('list-group-item-warning');
 
 			listItem.html(item.getName());
-			listItem.draggable({
-
-			});
 			container.append(listItem);
 		};
 	}
