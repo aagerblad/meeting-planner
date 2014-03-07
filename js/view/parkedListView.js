@@ -1,14 +1,30 @@
 var ParkedListView = function(container, model){
 	
-	model.addObserver(this);
+	//model.addObserver(this);
 	fillParkedList();
 
 	function fillParkedList(){
-		var parkedItems = model.getParkedActivities();
-		for (var i = parkedActivities.length - 1; i >= 0; i--) {
+		var parkedItems = model.parkedActivities;
+
+		for (var i = parkedItems.length - 1; i >= 0; i--) {
+			item = parkedItems[i];
 			var listItem = $('<li></li>');
 			listItem.addClass('list-group-item');
-			listItem.HTML(parkedActivities[i]);
+
+			if(item.getTypeId() == 0)
+				listItem.addClass('list-group-item-success');
+			else if(item.getTypeId() == 1)
+				listItem.addClass('list-group-item-danger');
+			else if(item.getTypeId() == 2)
+				listItem.addClass('list-group-item-info');
+			else 
+				listItem.addClass('list-group-item-warning');
+
+			listItem.html(item.getName());
+			listItem.draggable({
+
+			});
+			container.append(listItem);
 		};
 	}
 
