@@ -127,7 +127,7 @@
 	</div>
 
 <!-- Modal -->
-<div class="modal fade" id="newActivityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="newActivityModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -136,7 +136,7 @@
       </div>
       <div class="modal-body">
         
-      	<form role="form" class="form-horizontal">
+      	<form id="newActivityForm" role="form" class="form-horizontal">
       		<div class="form-group">
       			<label for="title">Title</label>
       			<input id="title" type="text" class="form-control"/>
@@ -154,11 +154,8 @@
       			<label for="desc">Description</label>
       			<textarea id="desc" class="form-control"></textarea>
       		</div>
+      		<input class="btn btn-primary" type="submit" value="Save activity" />
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button id="newActivityButton" type="button" class="btn btn-primary" data-dismiss="modal">Save activity</button>
       </div>
     </div>
   </div>

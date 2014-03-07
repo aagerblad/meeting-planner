@@ -1,6 +1,8 @@
 var ModalView = function(container, model){
 
 	this.newButton = container.find('#newActivityButton');
+	this.acModal = container;
+	this.acForm = container.find('#newActivityForm');
 	this.acTitle = container.find('#title');
 	this.acTime = container.find('#time');
 	this.acTypes = container.find('#types');
