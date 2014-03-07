@@ -45,7 +45,7 @@
 		<!-- First table -->
 		<div class='col-md-3 col-md-offset-1 fill'>
 
-			<button type="button" class="form-control btn btn-success large box-shadow">Default</button>
+			<button type="button" class="form-control btn btn-success large box-shadow" data-toggle="modal" data-target='#newActivityModal'>Create Activity</button>
 			
 			<div class='list-fill top-buffer panel'>
 				<ul id="parkedList" class='list-group'>
@@ -122,6 +122,24 @@
 
 	</div>
 
+<!-- Modal -->
+<div class="modal fade" id="newActivityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modalLabel">New Activity</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save activity</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
