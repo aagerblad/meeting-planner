@@ -174,7 +174,7 @@ function Model(){
 			day = new Day(8,0);
 		}
 		this.days.push(day);
-		this.notifyObservers();
+		this.notifyObservers("day_added");
 		return day;
 	};
 	

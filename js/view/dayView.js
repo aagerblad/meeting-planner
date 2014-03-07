@@ -1,4 +1,5 @@
 var DayView = function(container, model){
+	model.addObserver(this);
 	this.daysContainer = container.find('#days_container');
 	fillDays();
 
@@ -66,6 +67,12 @@ var DayView = function(container, model){
 			$('#days_container').append(dayItem);
 
 		};
+	}
+
+	this.update = function(arg) {
+		if(arg = "day_added") {
+			fillDays();
+		}
 	}
 
 }
