@@ -235,7 +235,8 @@ function Model(){
 			var activity = this.days[oldday]._removeActivity(oldposition);
 			this.days[newday]._addActivity(activity,newposition);
 		}
-		this.notifyObservers();
+		this.notifyObservers("day_added");
+		this.notifyObservers("activity_added");
 	};
 
 	//*** OBSERVABLE PATTERN ***

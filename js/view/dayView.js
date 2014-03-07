@@ -46,9 +46,10 @@ var DayView = function(container, model){
 			var list = $('<ul></ul>');
 			list.addClass('day-list');
 			list.addClass('list-group');
+			list.attr('id', 'D'+i);
 
 			var dayItems = day._activities;
-			for (var j = dayItems.length - 1; j >= 0; j--) {
+			for (var j = 0; j <= dayItems.length - 1; j++) {
 				item = dayItems[j];
 				var listItem = $('<li></li>');
 				listItem.attr('id', item.getId());
@@ -76,22 +77,48 @@ var DayView = function(container, model){
 
 	function makeActivitiesSortable() {
 		$('.day-list').sortable({
-		helper: "clone",
-		appendTo: "body",
-		placeholder: "placeholder-list-element",
-		forcePlaceholderSize: true,
-		connectWith: "ul",
-		tolerance: "pointer",
-		dropOnEmpty: true,
-		distance: 1.0,
-		receive: function(event, ui){
-			/*var activity = model.allActivities[ui.item.attr("id")];*/
-			var itemId = ui.item.attr("id");
-			var activity = model.allActivities[itemId];
-			model.addActivity(activity,0,0);
-		}
-		})
+			helper: "clone",
+			appendTo: "body",
+			placeholder: "placeholder-list-element",
+			forcePlaceholderSize: true,
+			connectWith: "ul",
+			tolerance: "pointer",
+			dropOnEmpty: true,
+			distance: 1.0,
 
+			start: function(e, ui) {
+        		// creates a temporary attribute on the element with the old index
+        		ui.item.attr('data-previndex', ui.item.index());
+        		ui.item.attr('data-prevparent', ui.item.parent().attr('id'));
+    		},
+
+			/*receive: function(event, ui){*/
+				/*var activity = model.allActivities[ui.item.attr("id")];*/
+			/*	var itemIndex = ui.item.index();
+				var oldIndex = ui.item.attr('data-previndex');
+				model.moveActivity(null,oldIndex,0,itemIndex);
+			},*/
+	
+			update: function(event, ui){
+				/*var activity = model.allActivities[ui.item.attr("id")];*/
+				var newIndex = ui.item.index();
+				var foo = ui.item.parent().attr('id').split('D')[1];
+				var newDay = parseInt(foo);
+				var oldIndex = parseInt(ui.item.attr('data-previndex'));
+				var bar = ui.item.attr('data-prevparent');
+				if (bar == null) {
+					var oldDay = null;
+				} else {
+					var oldDay = parseInt(bar.split('D')[1]);
+				};
+				if (oldIndex > newIndex) {
+					model.moveActivity(oldDay,oldIndex,newDay,newIndex);				
+				} else {				
+					model.moveActivity(oldDay,oldIndex,newDay,newIndex + 1);
+				}
+			}
+
+		})
 	}
 
 	function makeDaysSortable() {

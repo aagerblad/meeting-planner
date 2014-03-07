@@ -2,12 +2,13 @@ var ParkedListView = function(container, model){
 	
 	model.addObserver(this);
 	fillParkedList();
+	makeParkedListSortable();
 
 	function fillParkedList(){
 		var parkedItems = model.parkedActivities;
 		container.children().remove();
 
-		for (var i = parkedItems.length - 1; i >= 0; i--) {
+		for (var i = 0; i <= parkedItems.length - 1; i++) {
 			item = parkedItems[i];
 			var listItem = $('<li></li>');
 			listItem.attr('id', item.getId());
@@ -29,15 +30,20 @@ var ParkedListView = function(container, model){
 
 	function makeParkedListSortable() {
 		$('#parkedList').sortable({
-		helper: "clone",
-		appendTo: "body",
-		placeholder: "placeholder-list-element",
-		forcePlaceholderSize: true,
-		connectWith: "ul",
-		tolerance: "pointer",
-		dropOnEmpty: true,
-		distance: 1.0
-	})
+			helper: "clone",
+			appendTo: "body",
+			placeholder: "placeholder-list-element",
+			forcePlaceholderSize: true,
+			connectWith: "ul",
+			tolerance: "pointer",
+			dropOnEmpty: true,
+			distance: 1.0,
+			start: function(e, ui) {
+        		// creates a temporary attribute on the element with the old index
+        		ui.item.attr('data-previndex', ui.item.index());
+        		ui.item.attr('data-prevparent', null);
+    		}
+		})
 	}
 
 
