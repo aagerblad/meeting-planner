@@ -85,8 +85,10 @@ var DayView = function(container, model){
 		dropOnEmpty: true,
 		distance: 1.0,
 		receive: function(event, ui){
-			var activity = model.allActivities[ui.item.attr("id")];
-			model.addActivity(ui.item, )
+			/*var activity = model.allActivities[ui.item.attr("id")];*/
+			var itemId = ui.item.attr("id");
+			var activity = model.allActivities[itemId];
+			model.addActivity(activity,0,0);
 		}
 		})
 
