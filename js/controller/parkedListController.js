@@ -1,4 +1,4 @@
-var HomeController = function(view, model){
+var ParkedListController = function(view, model){
 
 	view.chooseDishBtn.click(chooseDish);
 	view.backBtn.click(back);

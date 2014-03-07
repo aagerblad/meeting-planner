@@ -145,10 +145,12 @@ function Day(startH,startM) {
 function Model(){
 	this.days = [];
 	this.parkedActivities = [];
-	createTestData();
 	
 	// adds a new day. if startH and startM (start hours and minutes)
 	// are not provided it will set the default start of the day to 08:00
+	this.getParkedActivites = function () {
+		return this.parkedActivities;
+	}
 	this.addDay = function (startH,startM) {
 		var day;
 		if(startH){
@@ -225,7 +227,7 @@ function Model(){
 // this is the instance of our main model
 // this is what you should use in your application
 var model = new Model();
-
+createTestData();
 
 // you can use this method to create some test data and test your implementation
 function createTestData(){
