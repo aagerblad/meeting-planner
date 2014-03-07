@@ -20,7 +20,7 @@ body {
 
 .DocumentList
 {
-    overflow-x:scroll;
+    overflow-x:auto;
     overflow-y:hidden;
     /*padding: 0 15px;*/
     white-space: nowrap;
@@ -34,7 +34,7 @@ body {
 }
 
 .specialrow {
-    width: 500%;
+    /*width: 500%;*/
 }
 
 .list-wrapper {
@@ -69,4 +69,8 @@ body {
 
 .list-droppable {
     overflow-y: auto;
+}
+
+.list-group {
+    min-height: 100%;
 }
