@@ -10,5 +10,9 @@ var DayController = function(view, model) {
 		distance: 1.0
 	})
 
+	$('#days_container').sortable({
+		revert: true
+	})
+
 	
 }
