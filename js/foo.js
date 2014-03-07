@@ -1,9 +1,32 @@
 $(document).ready(function(){
-	$('li').draggable({
-		revert: "invalid"	
-	})
+	setDraggable();
 
-	$('li').mousedown(function(){
-		$(this).css('z-index',100);
-	})
+	$('.list-droppable').droppable({
+		drop: function( event, ui ) {
+			var childrens = this.children[0];
+			$("<li></li>").text( ui.draggable.text()).addClass(ui.draggable.attr("class")).appendTo(childrens);
+			setDraggable();
+			ui.draggable.remove();
+		}
+	});
+
+
 })
+
+function setDraggable() {
+	$('li').draggable({
+		helper: "clone",
+		revert: "invalid",
+		appendTo: "body",
+		start: function(e, ui){ //hide original when showing clone
+            $(this).hide();             
+            $(ui.helper).addClass('col-md-2')
+
+        },
+        stop: function(){ //show original when hiding clone
+            $(this).show();
+        },
+		zIndex: 1000
+	});
+}
+

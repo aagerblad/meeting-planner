@@ -56,3 +56,7 @@ body {
     height: 100%
     top: 0;
 }
+
+.helper-class {
+    width: 30px;
+}
