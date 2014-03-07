@@ -38,10 +38,11 @@
 	<script type="text/javascript" src="js/foo.js"></script>
 
 </head>
-<body id="mainBody" background='res/handmadepaper.png'>
+<!-- <body id="mainBody" background='res/handmadepaper.png'> -->
+<body id="mainBody" style="background: #EEE">
 
-	<div class="page-header">
-		<h1 style='text-align:center'>Example page header <small>Subtext for header</small></h1>
+	<div class="row" style="background: #490A3D">
+		<h1 style='text-align:center; color: #F8CA00'>Meetings <small>revolutionalized</small></h1>
 	</div>
 
 
@@ -49,17 +50,12 @@
 
 
 		<!-- First table -->
-		<div id="unused-activity-div" class='col-md-3 col-md-offset-1 fill'>
+		<div id="unused-activity-div" class='col-md-3 col-md-offset-1 fill panel parked-wrapper'>
 
 			<button type="button" class="form-control btn btn-success large box-shadow" data-toggle="modal" data-target='#newActivityModal'><div class='glyphicon glyphicon-plus'></div> Create Activity</button>
 			
-			<div class='list-droppable activity-list-fill top-buffer panel'>
-				<ul id="parkedList" class='list-group'>
-					<li class='unused-activity-element list-group-item list-group-item-success'>hej</li>
-					<li class='unused-activity-element list-group-item list-group-item-info'>Hej</li>
-					<li class='unused-activity-element list-group-item list-group-item-warning'>Hej</li>
-					<li class='unused-activity-element list-group-item list-group-item-danger'>Hej</li>
-				</ul>
+			<div class='panel list-droppable activity-list-fill top-buffer'>
+				<ul id="parkedList" class='list-group'></ul>
 			</div>
 
 		</div>

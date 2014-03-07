@@ -25,7 +25,7 @@ body {
 
 .DocumentList
 {
-    overflow-x:scroll;
+    overflow-x:auto;
     overflow-y:hidden;
     /*padding: 0 15px;*/
     white-space: nowrap;
@@ -37,6 +37,13 @@ body {
     margin-left: 10px;
     width: 250px;
     float: left;
+    /*border: 3px solid #490A3D;*/
+    padding-top: 5px;
+}
+
+.parked-wrapper {
+    /*border: 3px solid #490A3D;*/
+    padding-top: 5px;
 }
 
 .specialrow {
@@ -75,6 +82,7 @@ body {
 
 .list-droppable {
     overflow-y: auto;
+    border: 3px dashed #490A3D;
 }
 
 .list-group {

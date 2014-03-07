@@ -41,13 +41,13 @@ var DayView = function(container, model){
 			diagram.css({'height':'90px'})
 
 			var stack1 = $('<div></div>');
-			stack1.css({'background':'green', 'height':'25%', 'width':'100%'});
+			stack1.css({'background':'#8A9B0F', 'height':'25%', 'width':'100%'});
 			var stack2 = $('<div></div>');
-			stack2.css({'background':'red', 'height':'25%', 'width':'100%'});
+			stack2.css({'background':'#BD1550', 'height':'25%', 'width':'100%'});
 			var stack3 = $('<div></div>');
-			stack3.css({'background':'yellow', 'height':'25%', 'width':'100%'});
+			stack3.css({'background':'#490A3D', 'height':'25%', 'width':'100%'});
 			var stack4 = $('<div></div>');
-			stack4.css({'background':'blue', 'height':'25%', 'width':'100%'});
+			stack4.css({'background':'#E97F02', 'height':'25%', 'width':'100%'});
 			diagram.append(stack1);
 			diagram.append(stack2);
 			diagram.append(stack3);
@@ -123,6 +123,9 @@ var DayView = function(container, model){
 				var newIndex = ui.item.index();
 				var foo = ui.item.parent().attr('id').split('D')[1];
 				var newDay = parseInt(foo);
+				if (isNaN(newDay)) {
+					newDay = null;
+				};
 				var oldIndex = parseInt(ui.item.attr('data-previndex'));
 				var bar = ui.item.attr('data-prevparent');
 				if (bar == null) {
@@ -130,10 +133,18 @@ var DayView = function(container, model){
 				} else {
 					var oldDay = parseInt(bar.split('D')[1]);
 				};
-				if (oldIndex > newIndex) {
-					model.moveActivity(oldDay,oldIndex,newDay,newIndex);				
-				} else {				
-					model.moveActivity(oldDay,oldIndex,newDay,newIndex + 1);
+
+				if (oldDay == newDay) {
+					if (oldIndex < newIndex) {
+						model.moveActivity(oldDay,oldIndex,newDay,newIndex + 1);
+					} else {
+						model.moveActivity(oldDay,oldIndex,newDay,newIndex);
+					};
+				} else if (model.activityHasMoved) {
+					model.activityHasMoved = false;
+				} else {
+					model.moveActivity(oldDay,oldIndex,newDay,newIndex);
+					model.activityHasMoved = true;
 				}
 			}
 

@@ -163,6 +163,10 @@ function Day(startH,startM) {
 
 // this is our main module that contians days and praked activites
 function Model(){
+
+	// Super ugly code here. TODO make it not superugly
+	this.activityHasMoved = false;
+
 	this.activityId = 0;
 	this.allActivities = [];
 	this.days = [];
