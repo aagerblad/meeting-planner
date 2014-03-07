@@ -3,8 +3,17 @@
 	height: 100%;
 }
 
-html, body {
-    height: 85%;
+.list-fill {
+    min-height: 80%;
+    height: 80%;   
+}
+
+body {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
 }
 
 .top-buffer { margin-top:20px; }
@@ -26,4 +35,24 @@ html, body {
 
 .specialrow {
     width: 500%;
+}
+
+.list-wrapper {
+    position: absolute;
+    height: 100%;
+    top: 30%;
+
+}
+
+.fill-to-bottom {
+    position: absolute;
+    top: 15%;
+    left: 0;
+    width: 100%;
+    height: 80%;
+}
+
+.table-to-bottom {
+    height: 100%
+    top: 0;
 }
