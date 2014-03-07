@@ -41,6 +41,7 @@ var DayView = function(container, model){
 			listHolder.addClass('panel');
 
 			var list = $('<ul></ul>');
+			list.addClass('day-list');
 			list.addClass('list-group');
 
 			var dayItems = day._activities;

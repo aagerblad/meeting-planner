@@ -17,7 +17,7 @@ $(document).ready(function(){
 			ui.draggable.remove();
 		}
 	})*/
-	$('ul').sortable({
+	/*$('ul').sortable({
 		helper: "clone",
 		appendTo: "body",
 		placeholder: "placeholder-list-element",
@@ -26,7 +26,7 @@ $(document).ready(function(){
 		tolerance: "pointer",
 		dropOnEmpty: true,
 		distance: 1.0
-	})
+	})*/
 
 	$('#days_container').sortable({
 		revert: true
