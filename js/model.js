@@ -145,6 +145,7 @@ function Day(startH,startM) {
 function Model(){
 	this.days = [];
 	this.parkedActivities = [];
+	createTestData();
 	
 	// adds a new day. if startH and startM (start hours and minutes)
 	// are not provided it will set the default start of the day to 08:00
