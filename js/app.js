@@ -5,6 +5,6 @@ $(function() {
     //And create the needed controllers and views
     //var exampleView = new ExampleView($("#exampleView"),model);
     //var exampleViewController = new ExampleViewController(exampleView,model);
-    var homeView = new HomeView($('#home-page-content'), model);
-    var homeController = new HomeController(homeView, model);
+    var parkedListView = new ParkedListView($('#parkedList'), model);
+    var parkedListController = new ParkedListController(parkedListView, model);
 });
