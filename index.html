@@ -24,7 +24,11 @@
 
 	<link href="css/custom.css" rel="stylesheet">
 	<script type="text/javascript" src="js/model.js"></script>
-		<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/view/mainView.js"></script>
+	<script type="text/javascript" src="js/controller/mainController.js"></script>
+	<script type="text/javascript" src="js/view/modalView.js"></script>
+	<script type="text/javascript" src="js/controller/modalController.js"></script>
 	<script type="text/javascript" src="js/view/parkedListView.js"></script>
 	<script type="text/javascript" src="js/controller/parkedListController.js"></script>
 	
@@ -32,7 +36,7 @@
 	<script type="text/javascript" src="js/foo.js"></script>
 
 </head>
-<body background='res/handmadepaper.png'>
+<body id="mainBody" background='res/handmadepaper.png'>
 
 	<div class="page-header">
 		<h1 style='text-align:center'>Example page header <small>Subtext for header</small></h1>
@@ -154,7 +158,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button id="newActivityButton" type="button" class="btn btn-primary">Save activity</button>
+        <button id="newActivityButton" type="button" class="btn btn-primary" data-dismiss="modal">Save activity</button>
       </div>
     </div>
   </div>
