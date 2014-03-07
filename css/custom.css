@@ -74,3 +74,30 @@ body {
 .list-group {
     min-height: 100%;
 }
+
+.add-a-day-btn {
+    position: absolute;
+    top: 40%;
+    width: 100px;
+    height: 100px;
+}
+
+.list-group-item-success {
+    background: #8A9B0F;
+    color: white;
+}
+
+.list-group-item-info {
+    background: #BD1550;
+    color: white;   
+}
+
+.list-group-item-warning {
+    background: #E97F02;
+    color: white;
+}
+
+.list-group-item-danger {
+    background: #490A3D;
+    color: white;
+}
