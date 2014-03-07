@@ -5,7 +5,7 @@ var ParkedListView = function(container, model){
 
 	function fillParkedList(){
 		var parkedItems = model.parkedActivities;
-		alert(parkedItems.length);
+
 		for (var i = parkedItems.length - 1; i >= 0; i--) {
 			item = parkedItems[i];
 			var listItem = $('<li></li>');
