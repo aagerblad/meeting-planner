@@ -9,6 +9,7 @@ function Activity(name,length,typeid,description, id, tempModel){
 	var _typeid = typeid;
 	var _description = description;
 	var _id = id;
+	var model = tempModel;
 
 	tempModel.allActivities[_id] = this;
 	
@@ -90,6 +91,28 @@ function Day(startH,startM) {
 		return totalLength;
 	};
 	
+	this.getPercentage = function (type) {
+		var time = {};
+		time['Presentation'] = 0;
+		time['Group Work'] = 0;
+		time['Discussion'] = 0;
+		time['Break'] = 0;
+		for (var i = this._activities.length - 1; i >= 0; i--) {
+				time[this._activities[i].getType()] = time[this._activities[i].getType()] + this._activities[i].getLength();
+			};
+		if (type == "Presentation"){
+			return (time['Presentation']/(time['Presentation'] + time['Group Work'] + time['Discussion'] + time['Break']))*100;
+		}
+		if (type == "Group Work"){
+			return (time['Group Work']/(time['Presentation'] + time['Group Work'] + time['Discussion'] + time['Break']))*100;
+		}
+		if (type == "Discussion"){
+			return (time['Discussion']/(time['Presentation'] + time['Group Work'] + time['Discussion'] + time['Break']))*100;
+		}
+		if (type == "Break"){
+			return (time['Break']/(time['Presentation'] + time['Group Work'] + time['Discussion'] + time['Break']))*100;
+		}
+	}
 	// returns the string representation Hours:Minutes of 
 	// the end time of the day
 	this.getEnd = function() {
@@ -260,9 +283,6 @@ function Model(){
 
 // this is the instance of our main model
 // this is what you should use in your application
-//var model = new Model();
-//createTestData();
-
 // you can use this method to create some test data and test your implementation
 function createTestData(model){
 	model.addDay();

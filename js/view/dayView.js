@@ -39,19 +39,28 @@ var DayView = function(container, model){
 			var diagram = $('<div></div>');
 			diagram.addClass("col-md-4");
 			diagram.css({'height':'90px'})
+			diagram.attr('id', 'P'+ i);
 
-			var stack1 = $('<div></div>');
-			stack1.css({'background':'#8A9B0F', 'height':'25%', 'width':'100%'});
-			var stack2 = $('<div></div>');
-			stack2.css({'background':'#BD1550', 'height':'25%', 'width':'100%'});
-			var stack3 = $('<div></div>');
-			stack3.css({'background':'#490A3D', 'height':'25%', 'width':'100%'});
-			var stack4 = $('<div></div>');
-			stack4.css({'background':'#E97F02', 'height':'25%', 'width':'100%'});
-			diagram.append(stack1);
-			diagram.append(stack2);
-			diagram.append(stack3);
-			diagram.append(stack4);
+			var presentation = $('<div></div>');
+			presentation.attr('id', 'PPR'+ i);
+			var heightString = day.getPercentage('Presentation') + '%';
+			presentation.css({'background':'#8A9B0F', 'height':heightString, 'width':'100%'});
+			var discussion = $('<div></div>');
+			discussion.attr('id', 'PDI'+ i);
+			heightString = day.getPercentage('Discussion') + '%';
+			discussion.css({'background':'#BD1550', 'height':heightString, 'width':'100%'});
+			var group_work = $('<div></div>');
+			group_work.attr('id', 'PGR'+ i);
+			heightString = day.getPercentage('Group Work') + '%';
+			group_work.css({'background':'#490A3D', 'height':heightString, 'width':'100%'});
+			var pause = $('<div></div>');
+			pause.attr('id', 'PPA'+ i);
+			heightString = day.getPercentage('Break') + '%';
+			pause.css({'background':'#E97F02', 'height':heightString, 'width':'100%'});
+			diagram.append(presentation);
+			diagram.append(discussion);
+			diagram.append(group_work);
+			diagram.append(pause);
 
 			row.append(diagram);
 			dayItem.append(row);
@@ -159,11 +168,26 @@ var DayView = function(container, model){
 
 	}
 
+	function updateProgressBar() {
+		var days = model.days;
+		var pause;
+		var presentation;
+		var group_work;
+		var discussion;
+		for (var i = 0; i < days.length; i++) {
+			var day = $('#P' + i);
+		};
+
+	}
+
 	this.update = function(arg) {
 		if(arg = "day_added") {
 			fillDays();
 			makeDaysSortable();
 			makeActivitiesSortable();
+		}
+		if(arg == "activity_added") {
+
 		}
 	}
 
