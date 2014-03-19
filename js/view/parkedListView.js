@@ -23,7 +23,12 @@ var ParkedListView = function(container, model){
 			else 
 				listItem.addClass('list-group-item-warning');
 
+			var time = $('<section></section>');
+			time.css('float', 'right');
+			time.html(item.getLength() + ' min');
+
 			listItem.html(item.getName());
+			listItem.append(time);
 			container.append(listItem);
 		};
 
