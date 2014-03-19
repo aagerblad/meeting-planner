@@ -8,6 +8,8 @@ var ModalView = function(container, model){
 	this.acTypes = container.find('#types');
 	this.acDesc = container.find('#desc');
     this.modalLabel = container.find('#modalLabel');
+    this.deleteBtn = container.find('#deleteBtn');
+    this.deleteBtn.hide();
     this.acModal.attr("title", "new");
 	fillTypes();
 

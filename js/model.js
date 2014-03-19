@@ -252,6 +252,16 @@ function Model(){
 		this.notifyObservers();
 		return act;
 	};
+    this.removeParkedActivityById = function(id) {
+        var act;
+        for (var i = 0; i < this.parkedActivities.length; i++){
+            if (this.parkedActivities[i].getId() == id){
+                act = this.parkedActivities.splice(i, 1)[0];
+            }
+        }
+        this.notifyObservers("activity added");
+        return act;
+    };
 	
 	// moves activity between the days, or day and parked activities.
 	// to park activity you need to set the new day to null
