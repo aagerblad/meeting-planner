@@ -12,7 +12,6 @@ var DayController = function(view, model) {
 		makeDaysSortable();
 		addDeleteClickListeners();
 		setDayListClickListeners
-		setParkedListClickListeners();
 		addTimeListener();
 	}
 
