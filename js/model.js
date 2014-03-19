@@ -259,7 +259,7 @@ function Model(){
                 act = this.parkedActivities.splice(i, 1)[0];
             }
         }
-        this.notifyObservers("activity added");
+        this.notifyObservers("activity_added");
         return act;
     };
 	
