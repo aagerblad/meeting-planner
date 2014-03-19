@@ -6,17 +6,21 @@ var DayController = function(view, model) {
 	makeActivitiesSortable();
 	makeDaysSortable();
 
-	function addDay() {
-		model.addDay();
+	function setListeners(){
 		makeActivitiesSortable();
 		makeDaysSortable();
 		addDeleteClickListeners();
+		setParkedListClickListeners();
+	}
+
+	function addDay() {
+		model.addDay();
+		setListeners();
 	}
 
 	function deleteDay(day) {
 		model.removeDay(parseInt(day.attr('title')));
-		addDeleteClickListeners();
-		makeActivitiesSortable();
+		setListeners();
 	}
 
 	function addDeleteClickListeners() {
@@ -39,12 +43,25 @@ var DayController = function(view, model) {
 				var newIndex = ui.item.index();
 				var oldIndex = parseInt(ui.item.attr('data-previndex'));
 				model.moveDay(oldIndex, newIndex);
-				makeActivitiesSortable();
-				makeDaysSortable();
-				addDeleteClickListeners();
+				setListeners();
 			}
 		})
 
+	}
+
+	function setParkedListClickListeners(){
+		$('#parkedList').children().click(function() {
+        	var activity = model.allActivities[$( this).attr('id')];
+        	var type = $('#types'+activity.getTypeId())
+        	type.val($('#type'+activity.getTypeId()));
+        	$('#time').val(activity.getLength());
+        	$('#title').val(activity.getName());
+        	$('#desc').val(activity.getDescription());
+        	$('#newActivityModal').modal('show');
+        	$('#newActivityModal').attr("title", $( this).attr('id'));
+        	$('#modalLabel').html('Edit Activity');
+        	$('#deleteBtn').show();
+    	});
 	}
 
 	function makeActivitiesSortable() {
@@ -100,8 +117,7 @@ var DayController = function(view, model) {
 				} else {
 					model.activityHasMoved = true;
 				}
-				makeActivitiesSortable();
-				addDeleteClickListeners();
+				setListeners();
 			}
 
 		})
