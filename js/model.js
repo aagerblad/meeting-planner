@@ -240,6 +240,11 @@ function Model(){
 		this.parkedActivities.push(activity);
 		this.notifyObservers();
 	};
+
+	this.addParkedActivityAtPosition = function(activity, position) {
+		this.parkedActivities.splice(position,0,activity);
+		this.notifyObservers('activity_added');
+	};
 	
 	// remove an activity on provided position from parked activites 
 	this.removeParkedActivity = function(position) {
@@ -271,6 +276,12 @@ function Model(){
 		this.notifyObservers("day_added");
 		this.notifyObservers("activity_added");
 	};
+
+	this.moveParkedActivity = function(oldposition, newposition) {
+		var activity = this.removeParkedActivity(oldposition);
+		this.addParkedActivityAtPosition(activity,newposition);
+		this.notifyObservers("activity_added");
+	}
 
 	//*** OBSERVABLE PATTERN ***
 	var listeners = [];
