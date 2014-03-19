@@ -5,8 +5,6 @@ $(function() {
     //And create the needed controllers and views
     //var exampleView = new ExampleView($("#exampleView"),model);
     //var exampleViewController = new ExampleViewController(exampleView,model);
-    var mainView = new MainView($('#mainBody'), model);
-    var mainController = new MainController(mainView, model);
     var dayView = new DayView($('#days'), model);
     var dayController = new DayController(dayView, model);
     var parkedListView = new ParkedListView($('#parkedList'), model);
