@@ -17,10 +17,10 @@ var DayView = function(container, model){
 			
 			var day = days[i];
 			var dayItem = $('<div></div>');
-			dayItem.addClass('col-md-3');
-			dayItem.addClass('DocumentItem');
+			/*dayItem.addClass('col-md-3');*/
 			dayItem.addClass('fill');
 			dayItem.addClass('panel');
+			dayItem.addClass('DocumentItem');
 			
 			var row = $('<div></div>');
 			row.addClass('row');

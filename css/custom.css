@@ -9,8 +9,14 @@
 }
 
 .list-fill {
-    min-height: 80%;
-    height: 80%;   
+    min-height: calc(90% - 90px);
+    height: calc(90% - 90px);   
+    top: 90px;
+    width: 200px;
+    margin-right: 15px;
+    margin-left: 15px;
+    position: absolute;
+
 }
 
 body {
@@ -37,9 +43,12 @@ body {
 {
     margin-left: 10px;
     width: 250px;
-    float: left;
+    /*float: left;*/
     /*border: 3px solid #490A3D;*/
     padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
 }
 
 .parked-wrapper {
@@ -48,7 +57,7 @@ body {
 }
 
 .specialrow {
-    width: 1500px;
+    white-space: nowrap;
 }
 
 .list-wrapper {

@@ -15,6 +15,7 @@ var DayController = function(view, model) {
 		view.daysContainer.sortable({
 			revert: true,
 			containment: "parent",
+			axis: "x",
 
 			start: function(e, ui) {
 				ui.item.attr('data-previndex', ui.item.index());
