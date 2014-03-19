@@ -13,7 +13,7 @@ var ModalController = function(view, model){
     });
 
     view.acModal.on('hidden.bs.modal', clearAllFields);
-
+    view.deleteBtn.click(deleteActivity)
     function addActivity() {
         if (view.acTitle.val() != "" && view.acTime.val() != "" && view.acTypes.val() != "" && view.acDesc.val() != ""){
             model.addActivity(new Activity(view.acTitle.val(), parseInt(view.acTime.val()), view.acTypes.val(), view.acDesc.val(), model.getNextId(), model), null);
@@ -67,6 +67,13 @@ var ModalController = function(view, model){
         view.acDesc.attr("placeholder", "");
         view.acModal.attr("title", "new");
         view.modalLabel.html('New Activity');
+        view.deleteBtn.hide();
+    }
+
+    function deleteActivity(){
+        var activity = model.allActivities[view.acModal.attr("title")];
+        model.removeParkedActivityById(activity.getId());
+        view.acModal.modal('hide');
     }
 
 	

@@ -33,7 +33,7 @@ var ParkedListView = function(container, model){
 		};
 
 		// MVC exception
-		$('#parkedList').children().click(function() {
+	$('#parkedList').children().click(function() {
         var activity = model.allActivities[$( this).attr('id')];
         var type = $('#types'+activity.getTypeId())
         type.val($('#type'+activity.getTypeId()));
@@ -42,7 +42,8 @@ var ParkedListView = function(container, model){
         $('#desc').val(activity.getDescription());
         $('#newActivityModal').modal('show');
         $('#newActivityModal').attr("title", $( this).attr('id'));
-        $('#modalLabel').html('Edit Activity')
+        $('#modalLabel').html('Edit Activity');
+        $('#deleteBtn').show();
     });
 	}
 

@@ -119,42 +119,48 @@
 
 
 
-	</div>
-
-<!-- Modal -->
-<div class="modal fade" id="newActivityModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="modalLabel">New Activity</h4>
-      </div>
-      <div class="modal-body">
-        
-      	<form id="newActivityForm" role="form" class="form-horizontal">
-      		<div class="form-group">
-      			<label for="title">Title</label>
-      			<input id="title" type="text" class="form-control"/>
-      		</div>
-      		<div class="form-group">
-      			<label for="time">Duration</label>
-      			<input id="time" type="number" class="form-control"/>
-      		</div>
-      		<div class="form-group">
-      			<label for="types">Type</label>
-      			<select id="types" class="form-control">
-      			</select>
-      		</div>
-      		<div class="form-group">
-      			<label for="desc">Description</label>
-      			<textarea id="desc" class="form-control"></textarea>
-      		</div>
-      		<input class="btn btn-primary" type="submit" value="Save activity" />
-        </form>
-      </div>
     </div>
-  </div>
-</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="newActivityModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalLabel">New Activity</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="newActivityForm" role="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input id="title" type="text" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Duration</label>
+                            <input id="time" type="number" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="types">Type</label>
+                            <select id="types" class="form-control">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="desc">Description</label>
+                            <textarea id="desc" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-8">
+                                <input class="btn btn-primary" type="submit" value="Save activity" />
+                            </div>
+                            <div class="col-xs-1">
+                                <input id="deleteBtn" class="btn btn-danger" value="Delete" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
