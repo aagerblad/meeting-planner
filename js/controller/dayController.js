@@ -14,7 +14,19 @@ var DayController = function(view, model) {
 	function makeDaysSortable() {
 		view.daysContainer.sortable({
 			revert: true,
-			containment: "parent"
+			containment: "parent",
+
+			start: function(e, ui) {
+				ui.item.attr('data-previndex', ui.item.index());
+			},
+
+			update: function(event, ui) {
+				var newIndex = ui.item.index();
+				var oldIndex = parseInt(ui.item.attr('data-previndex'));
+				model.moveDay(oldIndex, newIndex);
+				makeActivitiesSortable();
+				makeDaysSortable();
+			}
 		})
 
 	}

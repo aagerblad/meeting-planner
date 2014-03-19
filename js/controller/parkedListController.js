@@ -42,11 +42,7 @@ var ParkedListController = function(view, model){
 				};
 
 				if (oldDay == newDay) {
-					if (oldIndex < newIndex) {
-						model.moveActivity(oldDay,oldIndex,newDay,newIndex);
-					} else {
-						model.moveActivity(oldDay,oldIndex,newDay,newIndex);
-					};
+					model.moveParkedActivity(oldIndex, newIndex);
 				} else if (model.activityHasMoved) {
 					model.activityHasMoved = false;
 				} else {

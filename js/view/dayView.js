@@ -124,7 +124,7 @@ var DayView = function(container, model){
 	}
 
 	this.update = function(arg) {
-		if(arg = "day_added") {
+		if(arg == "day_added") {
 			fillDays();
 		}
 		if(arg == "activity_added") {

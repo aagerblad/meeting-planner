@@ -143,7 +143,7 @@ function Day(startH,startM) {
 	};
 	
 	// returns the length (in minutes) of activities of certain type
-	this.getLengthByType = function (typeid) {
+/*	this.getLengthByType = function (typeid) {
 		var length = 0;
 		$.each(this._activities,function(index,activity){
 			if(activity.getTypeId() == typeid){
@@ -151,7 +151,7 @@ function Day(startH,startM) {
 			}
 		});
 		return length;
-	};
+	};*/
 	
 	// adds an activity to specific position
 	// if the position is not provided then it will add it to the 
@@ -218,6 +218,12 @@ function Model(){
 		this.notifyObservers("day_added");
 		return day;
 	};
+
+	this.moveDay = function (oldposition, newposition) {
+		var day = this.days.splice(oldposition,1)[0];
+		this.days.splice(newposition,0,day);
+		this.notifyObservers('day_added');
+	}
 	
 	// add an activity to model
 	this.addActivity = function (activity,day,position) {
@@ -233,6 +239,11 @@ function Model(){
 	this.addParkedActivity = function(activity){
 		this.parkedActivities.push(activity);
 		this.notifyObservers();
+	};
+
+	this.addParkedActivityAtPosition = function(activity, position) {
+		this.parkedActivities.splice(position,0,activity);
+		this.notifyObservers('activity_added');
 	};
 	
 	// remove an activity on provided position from parked activites 
@@ -266,6 +277,12 @@ function Model(){
 		this.notifyObservers("activity_added");
 	};
 
+	this.moveParkedActivity = function(oldposition, newposition) {
+		var activity = this.removeParkedActivity(oldposition);
+		this.addParkedActivityAtPosition(activity,newposition);
+		this.notifyObservers("activity_added");
+	}
+
 	//*** OBSERVABLE PATTERN ***
 	var listeners = [];
 	
@@ -296,6 +313,6 @@ function createTestData(model){
 	console.log("Day End: " + model.days[0].getEnd());
 	console.log("Day Length: " + model.days[0].getTotalLength() + " min");
 	$.each(model.activityTypes,function(index,type){
-		console.log("Day '" + model.activityTypes[index] + "' Length: " +  model.days[0].getLengthByType(index) + " min");
+		//console.log("Day '" + model.activityTypes[index] + "' Length: " +  model.days[0].getLengthByType(index) + " min");
 	});
 }
