@@ -42,6 +42,7 @@ var ModalController = function(view, model){
             activity.setTypeId(view.acTypes.val());
             activity.setDescription(view.acDesc.val());
             clearAllFields();
+            model.notifyObservers('activity_added');
             return true;
         }
         else{

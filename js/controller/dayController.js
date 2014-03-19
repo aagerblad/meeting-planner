@@ -32,6 +32,7 @@ var DayController = function(view, model) {
 	}
 
 	function makeActivitiesSortable() {
+		model.activityHasMoved;
 		$('.day-list').sortable({
 			helper: "clone",
 			appendTo: "body",
@@ -79,8 +80,8 @@ var DayController = function(view, model) {
 					};
 				} else if (model.activityHasMoved) {
 					model.activityHasMoved = false;
-				} else {
 					model.moveActivity(oldDay,oldIndex,newDay,newIndex);
+				} else {
 					model.activityHasMoved = true;
 				}
 				makeActivitiesSortable();

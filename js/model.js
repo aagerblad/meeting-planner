@@ -188,7 +188,7 @@ function Day(startH,startM) {
 function Model(){
 
 	// Super ugly code here. TODO make it not superugly
-	this.activityHasMoved = false;
+	this.activityHasMoved = true;
 
 	this.activityId = 0;
 	this.allActivities = [];
