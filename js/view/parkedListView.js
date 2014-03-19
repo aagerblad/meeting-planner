@@ -30,8 +30,24 @@ var ParkedListView = function(container, model){
 			listItem.html(item.getName());
 			listItem.append(time);
 			container.append(listItem);
+            setParkedListClickListeners();
 		};
 	}
+
+    function setParkedListClickListeners(){
+        $('#parkedList').children().click(function() {
+            var activity = model.allActivities[$( this).attr('id')];
+            var type = $('#types'+activity.getTypeId())
+            type.val($('#type'+activity.getTypeId()));
+            $('#time').val(activity.getLength());
+            $('#title').val(activity.getName());
+            $('#desc').val(activity.getDescription());
+            $('#newActivityModal').modal('show');
+            $('#newActivityModal').attr("title", $( this).attr('id'));
+            $('#modalLabel').html('Edit Activity');
+            $('#deleteBtn').show();
+        });
+    }
 
 	this.update = function(arg){
 		if(arg=="activity_added") {

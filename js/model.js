@@ -90,7 +90,17 @@ function Day(startH,startM) {
 		});
 		return totalLength;
 	};
-	
+
+    this.getDayActivityById = function(id){
+        for (var i = this._activities.length - 1; i >= 0; i--) {
+            var tempId = this._activities[i].getId();
+            if (tempId == id){
+                return this._activities[i];
+            }
+        };
+        return null;
+    }
+
 	this.getPercentage = function (type) {
 		var time = {};
 		time['Presentation'] = 0;

@@ -10,8 +10,25 @@ var DayController = function(view, model) {
 		makeActivitiesSortable();
 		makeDaysSortable();
 		addDeleteClickListeners();
-		setParkedListClickListeners();
+        setDayListClickListeners();
 	}
+
+    function setDayListClickListeners(){
+        var activities = $('.day-list').children();
+        activities.click(function() {
+            var day = model.days[parseInt($(this).parent().attr('id').replace('D', ''))];
+            var activityId = parseInt($(this).attr('id'))
+            var activity = day.getDayActivityById(activityId);
+            var type = $('#types'+activity.getTypeId())
+            type.val($('#type'+activity.getTypeId()));
+            $('#time').val(activity.getLength());
+            $('#title').val(activity.getName());
+            $('#desc').val(activity.getDescription());
+            $('#newActivityModal').modal('show');
+            $('#newActivityModal').attr("title", $(this).attr('id'));
+            $('#modalLabel').html('Edit Activity');
+        });
+    }
 
 	function addDay() {
 		model.addDay();
@@ -49,20 +66,6 @@ var DayController = function(view, model) {
 
 	}
 
-	function setParkedListClickListeners(){
-		$('#parkedList').children().click(function() {
-        	var activity = model.allActivities[$( this).attr('id')];
-        	var type = $('#types'+activity.getTypeId())
-        	type.val($('#type'+activity.getTypeId()));
-        	$('#time').val(activity.getLength());
-        	$('#title').val(activity.getName());
-        	$('#desc').val(activity.getDescription());
-        	$('#newActivityModal').modal('show');
-        	$('#newActivityModal').attr("title", $( this).attr('id'));
-        	$('#modalLabel').html('Edit Activity');
-        	$('#deleteBtn').show();
-    	});
-	}
 
 	function makeActivitiesSortable() {
 		model.activityHasMoved;
