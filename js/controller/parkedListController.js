@@ -1,4 +1,16 @@
 var ParkedListController = function(view, model){
+    view.parkedList.children().click(function() {
+        var activity = model.allActivities[$( this).attr('id')];
+        var type = $('#types'+activity.getTypeId())
+        type.val($('#type'+activity.getTypeId()));
+        $('#time').val(activity.getLength());
+        $('#title').val(activity.getName());
+        $('#desc').val(activity.getDescription());
+        $('#newActivityModal').modal('show');
+        $('#newActivityModal').attr("title", $( this).attr('id'));
+        $('#modalLabel').html('Edit Activity')
+    });
+
 	view.parkedList.sortable({
 			helper: "clone",
 			appendTo: "body",

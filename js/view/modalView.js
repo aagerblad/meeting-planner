@@ -7,6 +7,8 @@ var ModalView = function(container, model){
 	this.acTime = container.find('#time');
 	this.acTypes = container.find('#types');
 	this.acDesc = container.find('#desc');
+    this.modalLabel = container.find('#modalLabel');
+    this.acModal.attr("title", "new");
 	fillTypes();
 
 	function fillTypes() {
@@ -15,6 +17,7 @@ var ModalView = function(container, model){
 			var type = model.activityTypes[i];
 			option.val(i);
 			option.html(type);
+            option.attr('id', 'type' + i);
 			container.find('#types').append(option);
 		};
 	}
