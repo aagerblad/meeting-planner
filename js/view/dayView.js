@@ -81,6 +81,7 @@ var DayView = function(container, model){
 			list.attr('id', 'D'+i);
 
 			var dayItems = day._activities;
+			var totalMin = 0;
 			for (var j = 0; j <= dayItems.length - 1; j++) {
 				item = dayItems[j];
 				var listItem = $('<li></li>');
@@ -96,9 +97,13 @@ var DayView = function(container, model){
 				else 
 					listItem.addClass('list-group-item-warning');
 
+				if (j != 0) {
+					totalMin += item.getLength();
+				}
+
 				var time = $('<section></section>');
 				time.css('float', 'right');
-				time.html(item.getLength() + ' min');
+				time.html(day.addToStart(totalMin));
 
 				listItem.html(item.getName());
 				listItem.append(time);

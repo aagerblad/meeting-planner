@@ -30,6 +30,7 @@ body {
     /*padding: 0 15px;*/
     white-space: nowrap;
     position: relative;
+
 }
 
 .DocumentItem
@@ -47,7 +48,7 @@ body {
 }
 
 .specialrow {
- /*   width: auto;*/
+    width: 1500px;
 }
 
 .list-wrapper {

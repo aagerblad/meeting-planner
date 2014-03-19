@@ -141,6 +141,19 @@ function Day(startH,startM) {
 		}
 		return hour + ":" + min;
 	};
+
+	this.addToStart = function(time) {
+		var hour = Math.floor((this._start + time)/60);
+		var min = (this._start + time) % 60;
+		if (min < 10){
+			min = "0" + min;
+		}
+		if (hour < 10){
+			hour = "0" + hour;
+		}
+		return hour + ":" + min;
+	};
+
 	
 	// returns the length (in minutes) of activities of certain type
 /*	this.getLengthByType = function (typeid) {

@@ -46,7 +46,6 @@ var ParkedListView = function(container, model){
     });
 	}
 
-
 	this.update = function(arg){
 		if(arg=="activity_added") {
 			fillParkedList();
