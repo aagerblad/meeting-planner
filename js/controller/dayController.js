@@ -2,6 +2,7 @@ var DayController = function(view, model) {
 	
 
 	view.addDayButton.click(addDay);
+	addDeleteClickListeners();
 	makeActivitiesSortable();
 	makeDaysSortable();
 
@@ -9,13 +10,26 @@ var DayController = function(view, model) {
 		model.addDay();
 		makeActivitiesSortable();
 		makeDaysSortable();
+		addDeleteClickListeners();
+	}
+
+	function deleteDay(day) {
+		model.removeDay(parseInt(day.attr('title')));
+		addDeleteClickListeners();
+		makeActivitiesSortable();
+	}
+
+	function addDeleteClickListeners() {
+		$('.delete-a-day-btn').click(function() {
+				deleteDay($(this));
+		})
 	}
 
 	function makeDaysSortable() {
 		view.daysContainer.sortable({
 			revert: true,
-			containment: "parent",
-			axis: "x",
+			helper: "clone",
+			appendTo: "parent",
 
 			start: function(e, ui) {
 				ui.item.attr('data-previndex', ui.item.index());
@@ -27,6 +41,7 @@ var DayController = function(view, model) {
 				model.moveDay(oldIndex, newIndex);
 				makeActivitiesSortable();
 				makeDaysSortable();
+				addDeleteClickListeners();
 			}
 		})
 
@@ -86,6 +101,7 @@ var DayController = function(view, model) {
 					model.activityHasMoved = true;
 				}
 				makeActivitiesSortable();
+				addDeleteClickListeners();
 			}
 
 		})

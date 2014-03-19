@@ -21,13 +21,17 @@ var DayView = function(container, model){
 			dayItem.addClass('fill');
 			dayItem.addClass('panel');
 			dayItem.addClass('DocumentItem');
-			
+
+
 			var row = $('<div></div>');
 			row.addClass('row');
 
 			var info = $('<div></div>');
 			info.addClass('col-md-8');
 
+			var dayNumber = $('<h3></h3>');
+			dayNumber.html("Day " + (i +1));
+			info.append(dayNumber);
 			var startTime = $('<p></p>');
 			startTime.html("Start time: "+day.getStart());
 			info.append(startTime);
@@ -112,6 +116,19 @@ var DayView = function(container, model){
 
 			listHolder.append(list);
 			dayItem.append(listHolder);
+
+			var deleteDayBtn = $('<button><div class="glyphicon glyphicon-minus"></div> Delete</button>');
+			deleteDayBtn.addClass('delete-a-day-btn');
+			deleteDayBtn.addClass('btn');
+			deleteDayBtn.addClass('btn-danger');
+			deleteDayBtn.addClass('large');
+			deleteDayBtn.attr('title',i);
+			
+
+			dayItem.append(deleteDayBtn);
+
+
+
 			$('#days_container').append(dayItem);
 
 		};

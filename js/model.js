@@ -232,6 +232,11 @@ function Model(){
 		return day;
 	};
 
+	this.removeDay = function (position) {
+		this.days.splice(position,1);
+		this.notifyObservers('day_added');
+	}
+
 	this.moveDay = function (oldposition, newposition) {
 		var day = this.days.splice(oldposition,1)[0];
 		this.days.splice(newposition,0,day);
