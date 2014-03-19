@@ -71,14 +71,15 @@ function Activity(name,length,typeid,description, id, tempModel){
 // This is a day consturctor. You can use it to create days, 
 // but there is also a specific function in the Model that adds
 // days to the model, so you don't need call this yourself.
-function Day(startH,startM) {
+function Day(startH,startM, tempModel) {
 	this._start = startH * 60 + startM;
 	this._activities = [];
+	var model = tempModel
 
 	// sets the start time to new value
 	this.setStart = function(startH,startM) {
 		this._start = startH * 60 + startM;
-		model.notifyObservers();
+		model.notifyObservers("day_added");
 	}
 
 	// returns the total length of the acitivities in 
@@ -223,9 +224,9 @@ function Model(){
 	this.addDay = function (startH,startM) {
 		var day;
 		if(startH){
-			day = new Day(startH,startM);
+			day = new Day(startH,startM, this);
 		} else {
-			day = new Day(8,0);
+			day = new Day(8,0, this);
 		}
 		this.days.push(day);
 		this.notifyObservers("day_added");

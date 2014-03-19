@@ -32,21 +32,30 @@ var DayView = function(container, model){
 			var dayNumber = $('<h3></h3>');
 			dayNumber.html("Day " + (i +1));
 			info.append(dayNumber);
-			var startTime = $('<p></p>');
-			startTime.html("Start time: "+day.getStart());
-			info.append(startTime);
-			var endTime = $('<p></p>');
-			endTime.html("End time: "+day.getEnd());
-			info.append(endTime);
-			var totalTime = $('<p></p>');
-			totalTime.html("Length of day: "+day.getTotalLength()+" min");
-			info.append(totalTime);
+
+			var table = $('<table></table>');
+			table.addClass('custom-table');
+			var startTime = $('<tr></tr>');
+			startTime.html("<th>Start time: </th>");
+			var timeTD = $('<td></td>');
+			var inputTime = $('<input class="custom-time-input" type="text"></input>');
+			inputTime.attr('id','T' + i);
+			timeTD.append(inputTime);
+			startTime.append(timeTD);
+			table.append(startTime);
+			var endTime = $('<tr></tr>');
+			endTime.html("<th>End time: </th><td> "+day.getEnd()+"</td>");
+			table.append(endTime);
+			var totalTime = $('<tr></tr>');
+			totalTime.html("<th>Length of day: </th><td> "+day.getTotalLength()+" min</td>");
+			table.append(totalTime);
+			info.append(table);
 
 			row.append(info);
 
 			var diagram = $('<div></div>');
 			diagram.addClass("col-md-4");
-			diagram.css({'height':'90px'})
+			diagram.css({'height':'150px'})
 			diagram.attr('id', 'P'+ i);
 
 			var presentation = $('<div></div>');

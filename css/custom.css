@@ -19,6 +19,15 @@
 
 }
 
+.custom-table {
+    padding:5px;
+    width: 150px;
+}
+
+.custom-time-input {
+    width: 70px;
+}
+
 body {
     position: fixed;
     height: 100vh;
