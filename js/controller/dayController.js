@@ -20,9 +20,9 @@ var DayController = function(view, model) {
 			if ($(this).val().match("^([0-1]?[0-9]|2[0-3]):([0-5][0-9])")) {
 				var id = $(this).attr('id');
 				var dayNumber = parseInt(id.split('T')[1]);
-				var time = $(this).val().split(':');
+				var time = $(this).val().substring(0,5).split(':');
 				model.days[dayNumber].setStart(parseInt(time[0]),parseInt(time[1]));
-				$('#'+id).val(time[0] + ":" + time[1]);
+				//$('#'+id).val(time[0] + ":" + time[1]);
 				setListeners();	
 			} else {
 				var id = $(this).attr('id');
