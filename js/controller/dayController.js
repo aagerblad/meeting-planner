@@ -1,5 +1,6 @@
 var DayController = function(view, model) {
-	
+
+
 
 	view.addDayButton.click(addDay);
 	addDeleteClickListeners();
