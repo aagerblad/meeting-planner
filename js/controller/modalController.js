@@ -1,6 +1,6 @@
 var ModalController = function(view, model){
 
-    //view.acForm.submit(addActivity);
+    // submit data and edit or add activity depending on what action was choosen by the user
     view.acForm.submit(function(e) {
         e.preventDefault();
         if (view.modalLabel.html() == "New Activity"){
@@ -12,8 +12,12 @@ var ModalController = function(view, model){
         }
     });
 
+    //initiate listeners
     view.acModal.on('hidden.bs.modal', clearAllFields);
-    view.deleteBtn.click(deleteActivity)
+    view.deleteBtn.click(deleteActivity);
+
+    // function for taking data from form and adding activity
+    // rejected if any field is invalid
     function addActivity() {
         if (view.acTitle.val() != "" && view.acTime.val() != "" && view.acTypes.val() != "" && view.acDesc.val() != ""){
             model.addActivity(new Activity(view.acTitle.val(), parseInt(view.acTime.val()), view.acTypes.val(), view.acDesc.val(), model.getNextId(), model), null);
@@ -34,6 +38,8 @@ var ModalController = function(view, model){
         }
     }
 
+    // function for taking data from form and editing activity
+    // rejected if any field is invalid
     function editActivity() {
         if (view.acTitle.val() != "" && view.acTime.val() != "" && view.acTypes.val() != "" && view.acDesc.val() != ""){
             var activity = model.allActivities[view.acModal.attr("title")];
@@ -58,6 +64,8 @@ var ModalController = function(view, model){
             return false;
         }
     }
+
+    // Clear form for next use
     function clearAllFields(){
         view.acTitle.val("");
         view.acTitle.attr("placeholder", "");
@@ -70,6 +78,7 @@ var ModalController = function(view, model){
         view.deleteBtn.hide();
     }
 
+    // Delete activity
     function deleteActivity(){
         var activity = model.allActivities[view.acModal.attr("title")];
         model.removeParkedActivityById(activity.getId());

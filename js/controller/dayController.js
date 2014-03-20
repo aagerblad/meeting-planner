@@ -11,7 +11,7 @@ var DayController = function(view, model) {
 		makeActivitiesSortable();
 		makeDaysSortable();
 		addDeleteClickListeners();
-		setDayListClickListeners
+		setDayListClickListeners();
 		addTimeListener();
 	}
 

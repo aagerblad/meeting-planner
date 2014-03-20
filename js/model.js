@@ -12,7 +12,8 @@ function Activity(name,length,typeid,description, id, tempModel){
 	var model = tempModel;
 
 	tempModel.allActivities[_id] = this;
-	
+
+    //get the global id of the activity
 	this.getId = function() {
 		return _id;
 	}
@@ -92,6 +93,7 @@ function Day(startH,startM, tempModel) {
 		return totalLength;
 	};
 
+    // returns a day based on the global id of the activity
     this.getDayActivityById = function(id){
         for (var i = this._activities.length - 1; i >= 0; i--) {
             var tempId = this._activities[i].getId();
@@ -102,6 +104,7 @@ function Day(startH,startM, tempModel) {
         return null;
     }
 
+    // returns percentage of the given activitytype for that day
 	this.getPercentage = function (type) {
 		var time = {};
 		time['Presentation'] = 0;
@@ -164,18 +167,6 @@ function Day(startH,startM, tempModel) {
 		}
 		return hour + ":" + min;
 	};
-
-	
-	// returns the length (in minutes) of activities of certain type
-/*	this.getLengthByType = function (typeid) {
-		var length = 0;
-		$.each(this._activities,function(index,activity){
-			if(activity.getTypeId() == typeid){
-				length += activity.getLength();
-			}
-		});
-		return length;
-	};*/
 	
 	// adds an activity to specific position
 	// if the position is not provided then it will add it to the 
@@ -347,11 +338,4 @@ function createTestData(model){
 	model.addActivity(new Activity("Working in groups",35,1,"", model.getNextId(), model),0);
 	model.addActivity(new Activity("Idea 1 discussion",15,2,"", model.getNextId(), model),null);
 	model.addActivity(new Activity("Coffee break",20,3,"", model.getNextId(), model),null);
-	
-	console.log("Day Start: " + model.days[0].getStart());
-	console.log("Day End: " + model.days[0].getEnd());
-	console.log("Day Length: " + model.days[0].getTotalLength() + " min");
-	$.each(model.activityTypes,function(index,type){
-		//console.log("Day '" + model.activityTypes[index] + "' Length: " +  model.days[0].getLengthByType(index) + " min");
-	});
 }

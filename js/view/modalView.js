@@ -1,5 +1,6 @@
 var ModalView = function(container, model){
 
+    // Initiate all components
 	this.newButton = container.find('#newActivityButton');
 	this.acModal = container;
 	this.acForm = container.find('#newActivityForm');
@@ -13,6 +14,7 @@ var ModalView = function(container, model){
     this.acModal.attr("title", "new");
 	fillTypes();
 
+    // Fill select from model
 	function fillTypes() {
 		for (var i = model.activityTypes.length - 1; i >= 0; i--) {
 			var option = $('<option></option>');
