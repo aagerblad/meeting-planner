@@ -1,20 +1,21 @@
 var DayController = function(view, model) {
-	
+
+
 
 	view.addDayButton.click(addDay);
-	addDeleteClickListeners();
-	makeActivitiesSortable();
-	makeDaysSortable();
-	addTimeListener();
+	setListeners();
 
+	// Add all listeners
 	function setListeners(){
 		makeActivitiesSortable();
 		makeDaysSortable();
 		addDeleteClickListeners();
 		setDayListClickListeners();
 		addTimeListener();
+        addBreaksClickListeners();
 	}
 
+	// Add listeners for start time input fields of days
 	function addTimeListener() {
 		$('.custom-time-input').on('focusout',function() {
 			if ($(this).val().match("^([0-1]?[0-9]|2[0-3]):([0-5][0-9])")) {
@@ -22,8 +23,6 @@ var DayController = function(view, model) {
 				var dayNumber = parseInt(id.split('T')[1]);
 				var time = $(this).val().substring(0,5).split(':');
 				model.days[dayNumber].setStart(parseInt(time[0]),parseInt(time[1]));
-				//$('#'+id).val(time[0] + ":" + time[1]);
-				setListeners();	
 			} else {
 				var id = $(this).attr('id');
 				$('#'+id).val('XX:XX');
@@ -33,6 +32,7 @@ var DayController = function(view, model) {
 		})
 	}
 
+	// Set listeners of activites in order to make them modifiable in days
     function setDayListClickListeners(){
         var activities = $('.day-list').children();
         activities.click(function() {
@@ -52,20 +52,45 @@ var DayController = function(view, model) {
 
 	function addDay() {
 		model.addDay();
-		setListeners();
 	}
 
 	function deleteDay(day) {
 		model.removeDay(parseInt(day.attr('title')));
-		setListeners();
 	}
 
+	// Add listener do delete buttons of days
 	function addDeleteClickListeners() {
 		$('.delete-a-day-btn').click(function() {
 				deleteDay($(this));
 		})
 	}
+    // Add listeners for add break function.
+    // Adds the breaks needed in a day.
+    function addBreaksClickListeners() {
+        $('.add-breaks-btn').click(function() {
+            var dayId = parseInt($(this).attr('title'));
+            var day = model.days[dayId];
+            var length =  day.getTotalLength();
+            var breakPercentage =(parseFloat(day.getPercentage('Break')))/100;
+            var oldBreakLength = breakPercentage * length;
+            length *= (1-breakPercentage);
+            length /= 3;
+            length -= oldBreakLength;
+            length++;
+            while (length > 1){
+                if(length > 15) {
+                    model.addActivity(new Activity("Break",15,3,"This is a break", model.getNextId(), model),dayId);
+                    length -= 15;
+                }
+                else{
+                    model.addActivity(new Activity("Break",parseInt(length),3,"This is a break", model.getNextId(), model),dayId);
+                    length = 0;
+                }
+            }
+        })
+    }
 
+	// Add listener in order to make days sortable
 	function makeDaysSortable() {
 		view.daysContainer.sortable({
 			revert: true,
@@ -80,13 +105,13 @@ var DayController = function(view, model) {
 				var newIndex = ui.item.index();
 				var oldIndex = parseInt(ui.item.attr('data-previndex'));
 				model.moveDay(oldIndex, newIndex);
-				setListeners();
 			}
 		})
 
 	}
 
 
+	// Add listener in order to make activities in days sortable
 	function makeActivitiesSortable() {
 		model.activityHasMoved;
 		$('.day-list').sortable({
@@ -105,15 +130,8 @@ var DayController = function(view, model) {
         		ui.item.attr('data-prevparent', ui.item.parent().attr('id'));
     		},
 
-			/*receive: function(event, ui){*/
-				/*var activity = model.allActivities[ui.item.attr("id")];*/
-			/*	var itemIndex = ui.item.index();
-				var oldIndex = ui.item.attr('data-previndex');
-				model.moveActivity(null,oldIndex,0,itemIndex);
-			},*/
 	
 			update: function(event, ui){
-				/*var activity = model.allActivities[ui.item.attr("id")];*/
 				var newIndex = ui.item.index();
 				var foo = ui.item.parent().attr('id').split('D')[1];
 				var newDay = parseInt(foo);
@@ -140,9 +158,20 @@ var DayController = function(view, model) {
 				} else {
 					model.activityHasMoved = true;
 				}
-				setListeners();
 			}
 
 		})
+
 	}
+
+    model.addObserver(this);
+
+    this.update = function(arg) {
+        if(arg == "day_added") {
+            setListeners();
+        }
+        if(arg == "activity_added") {
+            setListeners();
+        }
+    }
 }

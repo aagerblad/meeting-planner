@@ -145,3 +145,21 @@ body {
     background: #490A3D;
     color: white;
 }
+
+.divider {
+    position: absolute;
+    height: 2px;
+    width: 80%;
+    bottom: 25%;
+    left: 10%;
+    background: #dc143c;
+}
+.add-breaks-btn{
+    background: #E97F02;
+    color: white;
+    font-size: .8em;
+}
+.add-breaks-btn:hover {
+    background: #c36a02;
+    color: white;
+}
