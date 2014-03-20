@@ -42,7 +42,7 @@ var DayView = function(container, model){
 			var startTime = $('<tr></tr>');
 			startTime.html("<th>Start time: </th>");
 			var timeTD = $('<td></td>');
-			var inputTime = $('<input class="custom-time-input" type="text" maxlength="5"></input>');
+			var inputTime = $('<input class="custom-time-input" type="text" maxlength="5"/>');
 			inputTime.attr('id','T' + i);
 			inputTime.val(model.days[i].getStart());
 			timeTD.append(inputTime);
@@ -187,10 +187,10 @@ var DayView = function(container, model){
 
 	// Update method to be run on update.
 	this.update = function(arg) {
-		if(arg == "day_added") {
+		if(arg == "days_changed") {
 			fillDays();
 		}
-		if(arg == "activity_added") {
+		if(arg == "activities_changed") {
             fillDays();
 		}
 	}

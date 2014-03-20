@@ -80,7 +80,7 @@ function Day(startH,startM, tempModel) {
 	// sets the start time to new value
 	this.setStart = function(startH,startM) {
 		this._start = startH * 60 + startM;
-		model.notifyObservers("day_added");
+		model.notifyObservers("days_changed");
 	}
 
 	// returns the total length of the acitivities in 
@@ -167,6 +167,13 @@ function Day(startH,startM, tempModel) {
 		}
 		return hour + ":" + min;
 	};
+    this.getEndTime = function() {
+        var length = this._start
+        for (var i = 0; i < this._activities.length; i++){
+            length += this._activities[i].getLength();
+        }
+        return length;
+    };
 	
 	// adds an activity to specific position
 	// if the position is not provided then it will add it to the 
@@ -230,19 +237,20 @@ function Model(){
 			day = new Day(8,0, this);
 		}
 		this.days.push(day);
-		this.notifyObservers("day_added");
+		this.notifyObservers("days_changed");
 		return day;
 	};
 
+
 	this.removeDay = function (position) {
 		this.days.splice(position,1);
-		this.notifyObservers('day_added');
+		this.notifyObservers('days_changed');
 	}
 
 	this.moveDay = function (oldposition, newposition) {
 		var day = this.days.splice(oldposition,1)[0];
 		this.days.splice(newposition,0,day);
-		this.notifyObservers('day_added');
+		this.notifyObservers('days_changed');
 	}
 	
 	// add an activity to model
@@ -252,7 +260,7 @@ function Model(){
 		} else {
 			this.parkedActivities.push(activity);
 		}
-		this.notifyObservers("activity_added");
+		this.notifyObservers("activities_changed");
 	}
 	
 	// add an activity to parked activities
@@ -263,7 +271,7 @@ function Model(){
 
 	this.addParkedActivityAtPosition = function(activity, position) {
 		this.parkedActivities.splice(position,0,activity);
-		this.notifyObservers('activity_added');
+		this.notifyObservers('activities_changed');
 	};
 	
 	// remove an activity on provided position from parked activites 
@@ -279,7 +287,7 @@ function Model(){
                 act = this.parkedActivities.splice(i, 1)[0];
             }
         }
-        this.notifyObservers("activity_added");
+        this.notifyObservers("activities_changed");
         return act;
     };
 	
@@ -303,14 +311,14 @@ function Model(){
 			var activity = this.days[oldday]._removeActivity(oldposition);
 			this.days[newday]._addActivity(activity,newposition);
 		}
-		this.notifyObservers("day_added");
-		this.notifyObservers("activity_added");
+		this.notifyObservers("days_changed");
+		this.notifyObservers("activities_changed");
 	};
 
 	this.moveParkedActivity = function(oldposition, newposition) {
 		var activity = this.removeParkedActivity(oldposition);
 		this.addParkedActivityAtPosition(activity,newposition);
-		this.notifyObservers("activity_added");
+		this.notifyObservers("activities_changed");
 	}
 
 	//*** OBSERVABLE PATTERN ***
@@ -333,9 +341,9 @@ function Model(){
 // you can use this method to create some test data and test your implementation
 function createTestData(model){
 	model.addDay();
-	model.addActivity(new Activity("Introduction",10,0,"", model.getNextId(), model),null);
-	model.addActivity(new Activity("Idea 1",30,0,"", model.getNextId(), model),0);
-	model.addActivity(new Activity("Working in groups",35,1,"", model.getNextId(), model),0);
-	model.addActivity(new Activity("Idea 1 discussion",15,2,"", model.getNextId(), model),null);
-	model.addActivity(new Activity("Coffee break",20,3,"", model.getNextId(), model),null);
+	model.addActivity(new Activity("Introduction",10,0,"Intro", model.getNextId(), model),null);
+	model.addActivity(new Activity("Presenting Idea",30,0,"Speech", model.getNextId(), model),0);
+	model.addActivity(new Activity("Working in groups",35,1,"Working with friends", model.getNextId(), model),0);
+	model.addActivity(new Activity("Idea Discussion",15,2,"Debate", model.getNextId(), model),null);
+	model.addActivity(new Activity("Coffee break",20,3,"Coffee and cinnamon buns!", model.getNextId(), model),null);
 }

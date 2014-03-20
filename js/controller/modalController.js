@@ -19,7 +19,9 @@ var ModalController = function(view, model){
     // function for taking data from form and adding activity
     // rejected if any field is invalid
     function addActivity() {
-        if (view.acTitle.val() != "" && view.acTime.val() != "" && view.acTypes.val() != "" && view.acDesc.val() != ""){
+        var time = parseInt(view.acTime.val());
+        var limit = 1000;
+        if (view.acTitle.val() != "" && view.acTime.val() != "" && time < limit && view.acTypes.val() != "" && view.acDesc.val() != ""){
             model.addActivity(new Activity(view.acTitle.val(), parseInt(view.acTime.val()), view.acTypes.val(), view.acDesc.val(), model.getNextId(), model), null);
             clearAllFields();
             return true;
@@ -31,6 +33,10 @@ var ModalController = function(view, model){
             if (view.acTime.val() == ""){
                 view.acTime.attr("placeholder", "You have to set a duration!");
             }
+            if (time >= limit){
+                view.acTime.val('');
+                view.acTime.attr("placeholder", time +" min is too long! Below 1000 min is ok.");
+            }
             if (view.acDesc.val() == ""){
                 view.acDesc.attr("placeholder", "You have to set a description!");
             }
@@ -41,14 +47,16 @@ var ModalController = function(view, model){
     // function for taking data from form and editing activity
     // rejected if any field is invalid
     function editActivity() {
-        if (view.acTitle.val() != "" && view.acTime.val() != "" && view.acTypes.val() != "" && view.acDesc.val() != ""){
+        var time = parseInt(view.acTime.val());
+        var limit = 1000;
+        if (view.acTitle.val() != "" && view.acTime.val() != "" && time < limit && view.acTypes.val() != "" && view.acDesc.val() != ""){
             var activity = model.allActivities[view.acModal.attr("title")];
             activity.setName(view.acTitle.val());
             activity.setLength(parseInt(view.acTime.val()));
             activity.setTypeId(view.acTypes.val());
             activity.setDescription(view.acDesc.val());
             clearAllFields();
-            model.notifyObservers('activity_added');
+            model.notifyObservers('activities_changed');
             return true;
         }
         else{
@@ -57,6 +65,10 @@ var ModalController = function(view, model){
             }
             if (view.acTime.val() == ""){
                 view.acTime.attr("placeholder", "You have to set a duration!");
+            }
+            if (time >= limit){
+                view.acTime.val('');
+                view.acTime.attr("placeholder", time +" min is too long! Below 1000 min is ok.");
             }
             if (view.acDesc.val() == ""){
                 view.acDesc.attr("placeholder", "You have to set a description!");
