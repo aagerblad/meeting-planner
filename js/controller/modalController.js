@@ -12,7 +12,7 @@ var ModalController = function(view, model){
         }
     });
 
-    //initiate listeners
+    // Initiate listeners
     view.acModal.on('hidden.bs.modal', clearAllFields);
     view.deleteBtn.click(deleteActivity);
 
