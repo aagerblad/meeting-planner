@@ -1,5 +1,6 @@
 var ParkedListController = function(view, model){
-    
+
+    setParkedListClickListeners();
     // Sets listeners for drag and drop on the list which contains parked activities
 	view.parkedList.sortable({
 			helper: "clone",
@@ -43,4 +44,28 @@ var ParkedListController = function(view, model){
 				}
 			}
 		})
+    // Exception to MVC.
+    // Dynamic listeners set on listitems for edit click
+    function setParkedListClickListeners(){
+        $('#parkedList').children().click(function() {
+            var activity = model.allActivities[$( this).attr('id')];
+            var type = $('#types'+activity.getTypeId())
+            type.val($('#type'+activity.getTypeId()));
+            $('#time').val(activity.getLength());
+            $('#title').val(activity.getName());
+            $('#desc').val(activity.getDescription());
+            $('#newActivityModal').modal('show');
+            $('#newActivityModal').attr("title", $( this).attr('id'));
+            $('#modalLabel').html('Edit Activity');
+            $('#deleteBtn').show();
+        });
+    }
+
+    model.addObserver(this);
+
+    this.update = function(arg) {
+        if(arg == "activity_added") {
+            setParkedListClickListeners();
+        }
+    }
 }

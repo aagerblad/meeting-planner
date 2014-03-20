@@ -3,10 +3,7 @@ var DayController = function(view, model) {
 
 
 	view.addDayButton.click(addDay);
-	addDeleteClickListeners();
-	makeActivitiesSortable();
-	makeDaysSortable();
-	addTimeListener();
+	setListeners();
 
 	// Add all listeners
 	function setListeners(){
@@ -15,6 +12,7 @@ var DayController = function(view, model) {
 		addDeleteClickListeners();
 		setDayListClickListeners();
 		addTimeListener();
+        addBreaksClickListeners();
 	}
 
 	// Add listeners for start time input fields of days
@@ -26,7 +24,7 @@ var DayController = function(view, model) {
 				var time = $(this).val().substring(0,5).split(':');
 				model.days[dayNumber].setStart(parseInt(time[0]),parseInt(time[1]));
 				//$('#'+id).val(time[0] + ":" + time[1]);
-				setListeners();	
+				//setListeners();
 			} else {
 				var id = $(this).attr('id');
 				$('#'+id).val('XX:XX');
@@ -56,12 +54,10 @@ var DayController = function(view, model) {
 
 	function addDay() {
 		model.addDay();
-		setListeners();
 	}
 
 	function deleteDay(day) {
 		model.removeDay(parseInt(day.attr('title')));
-		setListeners();
 	}
 
 	// Add listener do delete buttons of days
@@ -70,6 +66,24 @@ var DayController = function(view, model) {
 				deleteDay($(this));
 		})
 	}
+    // Add listeners for add break function.
+    // Adds the breaks needed in a day.
+    function addBreaksClickListeners() {
+        $('.add-breaks-btn').click(function() {
+            var dayId = parseInt($(this).attr('title'));
+            var day = model.days[dayId];
+            var length =  day.getTotalLength();
+            var breakPercentage =(parseFloat(day.getPercentage('Break')))/100;
+            var oldBreakLength = breakPercentage * length;
+            length *= (1-breakPercentage);
+            length /= 3;
+            length -= oldBreakLength;
+            length++;
+            if(length > 1) {
+                model.addActivity(new Activity("Break",parseInt(length),3,"This is a break", model.getNextId(), model),dayId);
+            }
+        })
+    }
 
 	// Add listener in order to make days sortable
 	function makeDaysSortable() {
@@ -86,7 +100,6 @@ var DayController = function(view, model) {
 				var newIndex = ui.item.index();
 				var oldIndex = parseInt(ui.item.attr('data-previndex'));
 				model.moveDay(oldIndex, newIndex);
-				setListeners();
 			}
 		})
 
@@ -112,15 +125,8 @@ var DayController = function(view, model) {
         		ui.item.attr('data-prevparent', ui.item.parent().attr('id'));
     		},
 
-			/*receive: function(event, ui){*/
-				/*var activity = model.allActivities[ui.item.attr("id")];*/
-			/*	var itemIndex = ui.item.index();
-				var oldIndex = ui.item.attr('data-previndex');
-				model.moveActivity(null,oldIndex,0,itemIndex);
-			},*/
 	
 			update: function(event, ui){
-				/*var activity = model.allActivities[ui.item.attr("id")];*/
 				var newIndex = ui.item.index();
 				var foo = ui.item.parent().attr('id').split('D')[1];
 				var newDay = parseInt(foo);
@@ -147,9 +153,20 @@ var DayController = function(view, model) {
 				} else {
 					model.activityHasMoved = true;
 				}
-				setListeners();
 			}
 
 		})
+
 	}
+
+    model.addObserver(this);
+
+    this.update = function(arg) {
+        if(arg == "day_added") {
+            setListeners();
+        }
+        if(arg == "activity_added") {
+            setListeners();
+        }
+    }
 }

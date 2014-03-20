@@ -31,25 +31,9 @@ var ParkedListView = function(container, model){
 			listItem.html(item.getName());
 			listItem.append(time);
 			container.append(listItem);
-            setParkedListClickListeners();
 		};
 	}
-    // Exception to MVC.
-    // Dynamic listeners set on listitems for edit click
-    function setParkedListClickListeners(){
-        $('#parkedList').children().click(function() {
-            var activity = model.allActivities[$( this).attr('id')];
-            var type = $('#types'+activity.getTypeId())
-            type.val($('#type'+activity.getTypeId()));
-            $('#time').val(activity.getLength());
-            $('#title').val(activity.getName());
-            $('#desc').val(activity.getDescription());
-            $('#newActivityModal').modal('show');
-            $('#newActivityModal').attr("title", $( this).attr('id'));
-            $('#modalLabel').html('Edit Activity');
-            $('#deleteBtn').show();
-        });
-    }
+
     // Update called from model when new info is available to the view.
 	this.update = function(arg){
 		if(arg=="activity_added") {

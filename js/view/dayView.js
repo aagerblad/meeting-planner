@@ -36,7 +36,6 @@ var DayView = function(container, model){
 			dayNumber.html("Day " + (i +1));
 			info.append(dayNumber);
 
-
 			// Add table with day info, as well as an input box where start time of day can be modified
 			var table = $('<table></table>');
 			table.addClass('custom-table');
@@ -54,12 +53,25 @@ var DayView = function(container, model){
 			table.append(endTime);
 			var totalTime = $('<tr></tr>');
 			totalTime.html("<th>Length of day: </th><td> "+day.getTotalLength()+" min</td>");
-			table.append(totalTime);
-			info.append(table);
 
-			row.append(info);
+            table.append(totalTime);
+
+            info.append(table);
+            // Add button for creating breaks automatically
+            var breakPercentage = day.getPercentage('Break');
+            if (!isNaN(breakPercentage) && breakPercentage < 25){
+                var addBreakBtn = $('<button><div class="glyphicon glyphicon-plus"></div> Add Breaks</button>');
+                addBreakBtn.addClass('btn');
+                addBreakBtn.addClass('btn-default');
+                addBreakBtn.addClass('add-breaks-btn');
+                addBreakBtn.attr('title',i);
+                info.append(addBreakBtn);
+            }
+
+            row.append(info);
 
 			// Add diagram displaying percentage of different categories in day
+            var totalHeight = 0;
 			var diagram = $('<div></div>');
 			diagram.addClass("col-md-4");
 			diagram.css({'height':'150px'})
@@ -68,23 +80,41 @@ var DayView = function(container, model){
 			var presentation = $('<div></div>');
 			presentation.attr('id', 'PPR'+ i);
 			var heightString = day.getPercentage('Presentation') + '%';
+            totalHeight += parseInt(heightString.replace('%', ''));
 			presentation.css({'background':'#8A9B0F', 'height':heightString, 'width':'100%'});
+
 			var discussion = $('<div></div>');
 			discussion.attr('id', 'PDI'+ i);
 			heightString = day.getPercentage('Discussion') + '%';
+            totalHeight += parseInt(heightString.replace('%', ''));
 			discussion.css({'background':'#BD1550', 'height':heightString, 'width':'100%'});
+
 			var group_work = $('<div></div>');
 			group_work.attr('id', 'PGR'+ i);
 			heightString = day.getPercentage('Group Work') + '%';
+            totalHeight += parseInt(heightString.replace('%', ''));
 			group_work.css({'background':'#490A3D', 'height':heightString, 'width':'100%'});
+
 			var pause = $('<div></div>');
 			pause.attr('id', 'PPA'+ i);
 			heightString = day.getPercentage('Break') + '%';
+            totalHeight += parseInt(heightString.replace('%', ''));
 			pause.css({'background':'#E97F02', 'height':heightString, 'width':'100%'});
+
+            var divider = $('<div></div>');
+            divider.addClass('divider');
+
+            if (isNaN(totalHeight)){
+                var empty = $('<div></div>');
+                empty.css({'background':'gray', 'height':'100%', 'width':'100%'});
+                diagram.append(empty);
+            }
+
 			diagram.append(presentation);
 			diagram.append(discussion);
 			diagram.append(group_work);
 			diagram.append(pause);
+            diagram.append(divider);
 
 			row.append(diagram);
 			dayItem.append(row);
@@ -121,16 +151,14 @@ var DayView = function(container, model){
 				else 
 					listItem.addClass('list-group-item-warning');
 
-				if (j != 0) {
-					totalMin += item.getLength();
-				}
-
 				var time = $('<section></section>');
-				time.css('float', 'right');
-				time.html(day.addToStart(totalMin));
+
+                time.css('float', 'right');
+                time.html(day.addToStart(totalMin));
+                totalMin += item.getLength();
 
 				listItem.html(item.getName());
-				listItem.append(time);
+                listItem.append(time);
 				list.append(listItem);
 			};
 
@@ -144,11 +172,8 @@ var DayView = function(container, model){
 			deleteDayBtn.addClass('btn-danger');
 			deleteDayBtn.addClass('large');
 			deleteDayBtn.attr('title',i);
-			
 
 			dayItem.append(deleteDayBtn);
-
-
 
 			$('#days_container').append(dayItem);
 
@@ -161,7 +186,7 @@ var DayView = function(container, model){
 			fillDays();
 		}
 		if(arg == "activity_added") {
-
+            fillDays();
 		}
 	}
 
