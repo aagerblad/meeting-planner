@@ -3,15 +3,24 @@
 // This is an activity constructor
 // When you want to create a new activity you just call
 // var act = new Activity("some activity",20,1,"Some description);
-function Activity(name,length,typeid,description, id, tempModel){
+function Activity(name,length,typeid,description, id, tempModel, dayId){
 	var _name = name;
 	var _length = length;
 	var _typeid = typeid;
 	var _description = description;
 	var _id = id;
 	var model = tempModel;
+    var _dayId = dayId;       // null when created, listed in parked activities list
 
 	tempModel.allActivities[_id] = this;
+
+    this.getDayId = function() {
+        return _dayId;
+    }
+
+    this.setDayId = function(dayId) {
+        _dayId = dayId;
+    }
 
     //get the global id of the activity
 	this.getId = function() {
@@ -296,22 +305,49 @@ function Model(){
 	// to move a parked activity to let's say day 0 you set oldday to null
 	// and new day to 0
 	this.moveActivity = function(oldday, oldposition, newday, newposition) {
+
+        // move activity within a day
 		if(oldday !== null && oldday == newday) {
 			this.days[oldday]._moveActivity(oldposition,newposition);
+
+        // move activity within parked activities list
 		}else if(oldday == null && newday == null) {
 			var activity = this.removeParkedActivity(oldposition);
 			this.addParkedActivity(activity,newposition);
+
+        // move activity from parked activities to a day
 		}else if(oldday == null) {
-			var activity = this.removeParkedActivity(oldposition);
-			this.days[newday]._addActivity(activity,newposition);
+            var activity = this.parkedActivities[oldposition];
+
+            var targetDayLimit = 24*60 - this.days[newday].getEndTime();
+            if (activity.getLength() > targetDayLimit) {
+                toastr.error("This activity is too long to fit in this day.", "Error")
+            } else {
+                this.removeParkedActivity(oldposition);
+                this.days[newday]._addActivity(activity,newposition);
+            }
+
+        // move activity from day to parked activities list
 		}else if(newday == null) {
 			var activity = this.days[oldday]._removeActivity(oldposition);
 			this.addParkedActivity(activity);
+
+        // move activity between days
 		} else {
-			var activity = this.days[oldday]._removeActivity(oldposition);
-			this.days[newday]._addActivity(activity,newposition);
-		}
-		this.notifyObservers("days_changed");
+            var activity = this.days[oldday]._activities[oldposition];
+
+            var targetDayLimit = 24*60 - this.days[newday].getEndTime();
+            if (activity.getLength() > targetDayLimit) {
+                toastr.error("This activity is too long to fit in this day.", "Error")
+            } else {
+                this.days[oldday]._removeActivity(oldposition);
+                this.days[newday]._addActivity(activity,newposition);
+            }
+
+			//this.days[newday]._addActivity(activity,newposition);
+        }
+        activity.setDayId(newday);
+        this.notifyObservers("days_changed");
 		this.notifyObservers("activities_changed");
 	};
 
@@ -341,9 +377,9 @@ function Model(){
 // you can use this method to create some test data and test your implementation
 function createTestData(model){
 	model.addDay();
-	model.addActivity(new Activity("Introduction",10,0,"Intro", model.getNextId(), model),null);
-	model.addActivity(new Activity("Presenting Idea",30,0,"Speech", model.getNextId(), model),0);
-	model.addActivity(new Activity("Working in groups",35,1,"Working with friends", model.getNextId(), model),0);
-	model.addActivity(new Activity("Idea Discussion",15,2,"Debate", model.getNextId(), model),null);
-	model.addActivity(new Activity("Coffee break",20,3,"Coffee and cinnamon buns!", model.getNextId(), model),null);
+	model.addActivity(new Activity("Introduction",10,0,"Intro", model.getNextId(), model, null),null);
+	model.addActivity(new Activity("Presenting Idea",30,0,"Speech", model.getNextId(), model, 0),0);
+	model.addActivity(new Activity("Working in groups",35,1,"Working with friends", model.getNextId(), model, 0),0);
+	model.addActivity(new Activity("Idea Discussion",15,2,"Debate", model.getNextId(), model, null),null);
+	model.addActivity(new Activity("Coffee break",20,3,"Coffee and cinnamon buns!", model.getNextId(), model, null),null);
 }

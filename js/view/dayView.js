@@ -59,7 +59,11 @@ var DayView = function(container, model){
             info.append(table);
             // Add button for creating breaks automatically
             var breakPercentage = day.getPercentage('Break');
-            if (!isNaN(breakPercentage) && breakPercentage < 25){
+            if (day.getEndTime() >= (24*60 - 2)) {
+                var tooFewBreaks = $('<section></section>');
+                tooFewBreaks.html('No room for more breaks.');
+                info.append(tooFewBreaks);
+            } else if (!isNaN(breakPercentage) && breakPercentage < 25){
                 var addBreakBtn = $('<button><div class="glyphicon glyphicon-plus"></div> Add Breaks</button>');
                 addBreakBtn.addClass('btn');
                 addBreakBtn.addClass('btn-default');

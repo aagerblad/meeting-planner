@@ -70,20 +70,33 @@ var DayController = function(view, model) {
         $('.add-breaks-btn').click(function() {
             var dayId = parseInt($(this).attr('title'));
             var day = model.days[dayId];
+
+            var limit = (24*60) - day.getEndTime();
+
             var length =  day.getTotalLength();
+
+
+
             var breakPercentage =(parseFloat(day.getPercentage('Break')))/100;
             var oldBreakLength = breakPercentage * length;
             length *= (1-breakPercentage);
             length /= 3;
             length -= oldBreakLength;
+
             length++;
+
+
+            if (limit < length) {
+                length = limit-1;
+            }
+
             while (length > 1){
                 if(length > 15) {
-                    model.addActivity(new Activity("Break",15,3,"This is a break", model.getNextId(), model),dayId);
+                    model.addActivity(new Activity("Break",15,3,"This is a break", model.getNextId(), model, dayId),dayId);
                     length -= 15;
                 }
                 else{
-                    model.addActivity(new Activity("Break",parseInt(length),3,"This is a break", model.getNextId(), model),dayId);
+                    model.addActivity(new Activity("Break",parseInt(length),3,"This is a break", model.getNextId(), model, dayId),dayId);
                     length = 0;
                 }
             }
