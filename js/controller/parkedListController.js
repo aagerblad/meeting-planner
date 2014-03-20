@@ -1,6 +1,6 @@
 var ParkedListController = function(view, model){
     
-
+    // Sets listeners for drag and drop on the list which contains parked activities
 	view.parkedList.sortable({
 			helper: "clone",
 			appendTo: "body",
@@ -16,7 +16,6 @@ var ParkedListController = function(view, model){
         		ui.item.attr('data-prevparent', null);
     		},
     		update: function(event, ui){
-				/*var activity = model.allActivities[ui.item.attr("id")];*/
 				var newIndex = ui.item.index();
 				var newDay;
 				var id = ui.item.parent().attr('id');

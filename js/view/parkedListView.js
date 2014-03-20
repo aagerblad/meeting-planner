@@ -4,6 +4,7 @@ var ParkedListView = function(container, model){
 	model.addObserver(this);
 	fillParkedList();
 
+    //
 	function fillParkedList(){
 		var parkedItems = model.parkedActivities;
 		container.children().remove();
@@ -33,7 +34,8 @@ var ParkedListView = function(container, model){
             setParkedListClickListeners();
 		};
 	}
-
+    // Exception to MVC.
+    // Dynamic listeners set on listitems for edit click
     function setParkedListClickListeners(){
         $('#parkedList').children().click(function() {
             var activity = model.allActivities[$( this).attr('id')];
@@ -48,7 +50,7 @@ var ParkedListView = function(container, model){
             $('#deleteBtn').show();
         });
     }
-
+    // Update called from model when new info is available to the view.
 	this.update = function(arg){
 		if(arg=="activity_added") {
 			fillParkedList();
