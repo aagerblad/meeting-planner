@@ -21,9 +21,12 @@ var DayController = function(view, model) {
 				var id = $(this).attr('id');
 				var dayNumber = parseInt(id.split('T')[1]);
 				var time = $(this).val().split(':');
-				$(this).attr('placeholder','time[0] + ":" + time[1]');
 				model.days[dayNumber].setStart(parseInt(time[0]),parseInt(time[1]));
+				$('#'+id).val(time[0] + ":" + time[1]);
 				setListeners();	
+			} else {
+				var id = $(this).attr('id');
+				$('#'+id).val('XX:XX');
 			};
 
 
