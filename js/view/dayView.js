@@ -157,7 +157,12 @@ var DayView = function(container, model){
                 time.html(day.addToStart(totalMin));
                 totalMin += item.getLength();
 
-				listItem.html(item.getName());
+                if (item.getName().length > 15){
+				    listItem.html(item.getName().substr(0, 15)+'..');
+                }
+                else{
+                    listItem.html(item.getName());
+                }
                 listItem.append(time);
 				list.append(listItem);
 			};

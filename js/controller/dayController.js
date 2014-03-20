@@ -23,8 +23,6 @@ var DayController = function(view, model) {
 				var dayNumber = parseInt(id.split('T')[1]);
 				var time = $(this).val().substring(0,5).split(':');
 				model.days[dayNumber].setStart(parseInt(time[0]),parseInt(time[1]));
-				//$('#'+id).val(time[0] + ":" + time[1]);
-				//setListeners();
 			} else {
 				var id = $(this).attr('id');
 				$('#'+id).val('XX:XX');
@@ -79,8 +77,15 @@ var DayController = function(view, model) {
             length /= 3;
             length -= oldBreakLength;
             length++;
-            if(length > 1) {
-                model.addActivity(new Activity("Break",parseInt(length),3,"This is a break", model.getNextId(), model),dayId);
+            while (length > 1){
+                if(length > 15) {
+                    model.addActivity(new Activity("Break",15,3,"This is a break", model.getNextId(), model),dayId);
+                    length -= 15;
+                }
+                else{
+                    model.addActivity(new Activity("Break",parseInt(length),3,"This is a break", model.getNextId(), model),dayId);
+                    length = 0;
+                }
             }
         })
     }
