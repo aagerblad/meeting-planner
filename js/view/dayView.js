@@ -1,3 +1,4 @@
+// A view containing the days.
 var DayView = function(container, model){
 
 	this.dayList = $('.day-list');
@@ -9,6 +10,7 @@ var DayView = function(container, model){
 
 
 
+	// Draws the days according to the day model
 	function fillDays() {
 		var days = model.days;
 		$('#days_container').children().remove();
@@ -29,10 +31,13 @@ var DayView = function(container, model){
 			var info = $('<div></div>');
 			info.addClass('col-md-8');
 
+			// Add day number to day
 			var dayNumber = $('<h3></h3>');
 			dayNumber.html("Day " + (i +1));
 			info.append(dayNumber);
 
+
+			// Add table with day info, as well as an input box where start time of day can be modified
 			var table = $('<table></table>');
 			table.addClass('custom-table');
 			var startTime = $('<tr></tr>');
@@ -54,6 +59,7 @@ var DayView = function(container, model){
 
 			row.append(info);
 
+			// Add diagram displaying percentage of different categories in day
 			var diagram = $('<div></div>');
 			diagram.addClass("col-md-4");
 			diagram.css({'height':'150px'})
@@ -83,17 +89,21 @@ var DayView = function(container, model){
 			row.append(diagram);
 			dayItem.append(row);
 
+			// List wrapper for activities
 			var listHolder = $('<div></div>');
 			listHolder.addClass('panel');
 			listHolder.addClass('list-droppable');
 			listHolder.addClass('list-fill');
 			listHolder.addClass('top-buffer');
 
+			// List of activities
 			var list = $('<ul></ul>');
 			list.addClass('day-list');
 			list.addClass('list-group');
 			list.attr('id', 'D'+i);
 
+
+			// Add all list activities to list
 			var dayItems = day._activities;
 			var totalMin = 0;
 			for (var j = 0; j <= dayItems.length - 1; j++) {
@@ -127,6 +137,7 @@ var DayView = function(container, model){
 			listHolder.append(list);
 			dayItem.append(listHolder);
 
+			// Add delete button for days
 			var deleteDayBtn = $('<button><div class="glyphicon glyphicon-minus"></div> Delete</button>');
 			deleteDayBtn.addClass('delete-a-day-btn');
 			deleteDayBtn.addClass('btn');
@@ -144,22 +155,7 @@ var DayView = function(container, model){
 		};
 	}
 
-	
-
-	
-	// TODO remove?
-	function updateProgressBar() {
-		var days = model.days;
-		var pause;
-		var presentation;
-		var group_work;
-		var discussion;
-		for (var i = 0; i < days.length; i++) {
-			var day = $('#P' + i);
-		};
-
-	}
-
+	// Update method to be run on update.
 	this.update = function(arg) {
 		if(arg == "day_added") {
 			fillDays();

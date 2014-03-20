@@ -8,6 +8,7 @@ var DayController = function(view, model) {
 	makeDaysSortable();
 	addTimeListener();
 
+	// Add all listeners
 	function setListeners(){
 		makeActivitiesSortable();
 		makeDaysSortable();
@@ -16,6 +17,7 @@ var DayController = function(view, model) {
 		addTimeListener();
 	}
 
+	// Add listeners for start time input fields of days
 	function addTimeListener() {
 		$('.custom-time-input').on('focusout',function() {
 			if ($(this).val().match("^([0-1]?[0-9]|2[0-3]):([0-5][0-9])")) {
@@ -34,6 +36,7 @@ var DayController = function(view, model) {
 		})
 	}
 
+	// Set listeners of activites in order to make them modifiable in days
     function setDayListClickListeners(){
         var activities = $('.day-list').children();
         activities.click(function() {
@@ -61,12 +64,14 @@ var DayController = function(view, model) {
 		setListeners();
 	}
 
+	// Add listener do delete buttons of days
 	function addDeleteClickListeners() {
 		$('.delete-a-day-btn').click(function() {
 				deleteDay($(this));
 		})
 	}
 
+	// Add listener in order to make days sortable
 	function makeDaysSortable() {
 		view.daysContainer.sortable({
 			revert: true,
@@ -88,6 +93,7 @@ var DayController = function(view, model) {
 	}
 
 
+	// Add listener in order to make activities in days sortable
 	function makeActivitiesSortable() {
 		model.activityHasMoved;
 		$('.day-list').sortable({
