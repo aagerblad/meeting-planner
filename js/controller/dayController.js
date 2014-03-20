@@ -39,8 +39,8 @@ var DayController = function(view, model) {
             var day = model.days[parseInt($(this).parent().attr('id').replace('D', ''))];
             var activityId = parseInt($(this).attr('id'))
             var activity = day.getDayActivityById(activityId);
-            var type = $('#types'+activity.getTypeId())
-            type.val($('#type'+activity.getTypeId()));
+            var type = $('#types');
+            type.val(activity.getTypeId());
             $('#time').val(activity.getLength());
             $('#title').val(activity.getName());
             $('#desc').val(activity.getDescription());
@@ -167,10 +167,10 @@ var DayController = function(view, model) {
     model.addObserver(this);
 
     this.update = function(arg) {
-        if(arg == "day_added") {
+        if(arg == "days_changed") {
             setListeners();
         }
-        if(arg == "activity_added") {
+        if(arg == "activities_changed") {
             setListeners();
         }
     }

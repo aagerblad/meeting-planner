@@ -49,8 +49,8 @@ var ParkedListController = function(view, model){
     function setParkedListClickListeners(){
         $('#parkedList').children().click(function() {
             var activity = model.allActivities[$( this).attr('id')];
-            var type = $('#types'+activity.getTypeId())
-            type.val($('#type'+activity.getTypeId()));
+            var type = $('#types');
+            type.val(activity.getTypeId());
             $('#time').val(activity.getLength());
             $('#title').val(activity.getName());
             $('#desc').val(activity.getDescription());
@@ -64,7 +64,7 @@ var ParkedListController = function(view, model){
     model.addObserver(this);
 
     this.update = function(arg) {
-        if(arg == "activity_added") {
+        if(arg == "activities_changed") {
             setParkedListClickListeners();
         }
     }

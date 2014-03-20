@@ -36,7 +36,7 @@ var ParkedListView = function(container, model){
 
     // Update called from model when new info is available to the view.
 	this.update = function(arg){
-		if(arg=="activity_added") {
+		if(arg=="activities_changed") {
 			fillParkedList();
 		}
 		
