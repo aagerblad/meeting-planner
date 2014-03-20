@@ -40,6 +40,7 @@ var DayView = function(container, model){
 			var timeTD = $('<td></td>');
 			var inputTime = $('<input class="custom-time-input" type="text"></input>');
 			inputTime.attr('id','T' + i);
+			inputTime.val(model.days[i].getStart());
 			timeTD.append(inputTime);
 			startTime.append(timeTD);
 			table.append(startTime);
