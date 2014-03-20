@@ -122,6 +122,10 @@ body {
     height: 5%;
 }
 
+.list-group-item {
+    cursor: default;
+}
+
 .list-group-item-success {
     background: #8A9B0F;
     color: white;
