@@ -123,17 +123,18 @@ function Day(startH,startM, tempModel) {
 		for (var i = this._activities.length - 1; i >= 0; i--) {
 				time[this._activities[i].getType()] = time[this._activities[i].getType()] + this._activities[i].getLength();
 			};
+        totalTime = (time['Presentation'] + time['Group Work'] + time['Discussion'] + time['Break']);
 		if (type == "Presentation"){
-			return (time['Presentation']/(time['Presentation'] + time['Group Work'] + time['Discussion'] + time['Break']))*100;
+			return (time['Presentation']/totalTime)*100;
 		}
 		if (type == "Group Work"){
-			return (time['Group Work']/(time['Presentation'] + time['Group Work'] + time['Discussion'] + time['Break']))*100;
+			return (time['Group Work']/totalTime)*100;
 		}
 		if (type == "Discussion"){
-			return (time['Discussion']/(time['Presentation'] + time['Group Work'] + time['Discussion'] + time['Break']))*100;
+			return (time['Discussion']/totalTime)*100;
 		}
 		if (type == "Break"){
-			return (time['Break']/(time['Presentation'] + time['Group Work'] + time['Discussion'] + time['Break']))*100;
+			return (time['Break']/totalTime)*100;
 		}
 	}
 	// returns the string representation Hours:Minutes of 

@@ -42,7 +42,8 @@ var ModalController = function(view, model){
         var thisTime = activity.getLength();
         var day;
         var limit
-        if(activity.getDayId() ) {
+        var id = activity.getDayId();
+        if(activity.getDayId() != null) {
             day = model.days[activity.getDayId()];
             limit = (24*60) - day.getEndTime() + thisTime;
         } else {
