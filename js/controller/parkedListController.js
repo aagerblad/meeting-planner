@@ -3,7 +3,11 @@ var ParkedListController = function(view, model){
     setParkedListClickListeners();
     // Sets listeners for drag and drop on the list which contains parked activities
 	view.parkedList.sortable({
-			helper: "clone",
+			helper: function(e, ui) {
+        		var helper = ui.clone();
+        		helper.css({'width': '194px'});
+        		return helper;
+    		},
 			appendTo: "body",
 			placeholder: "placeholder-list-element",
 			forcePlaceholderSize: true,

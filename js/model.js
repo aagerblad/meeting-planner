@@ -331,7 +331,7 @@ function Model(){
         // move activity from day to parked activities list
 		}else if(newday == null) {
 			var activity = this.days[oldday]._removeActivity(oldposition);
-			this.addParkedActivity(activity);
+			this.addParkedActivityAtPosition(activity,newposition);
 
         // move activity between days
 		} else {
