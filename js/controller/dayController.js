@@ -47,6 +47,9 @@ var DayController = function(view, model) {
             $('#newActivityModal').modal('show');
             $('#newActivityModal').attr("title", $(this).attr('id'));
             $('#modalLabel').html('Edit Activity');
+            $('#deleteBtn').show();
+            $('#deleteBtn').val('Park to delete');
+            $('#deleteBtn').prop('disabled', true);
         });
     }
 

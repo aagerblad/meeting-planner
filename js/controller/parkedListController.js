@@ -62,6 +62,8 @@ var ParkedListController = function(view, model){
             $('#newActivityModal').attr("title", $( this).attr('id'));
             $('#modalLabel').html('Edit Activity');
             $('#deleteBtn').show();
+            $('#deleteBtn').val('Delete');
+            $('#deleteBtn').prop('disabled', false);
         });
     }
 
